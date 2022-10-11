@@ -1,12 +1,12 @@
 import React,{ useState } from 'react'
-import { View, Image, StyleSheet, ScrollView, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { View, Image, StyleSheet, ScrollView, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { Text,Card,TextInput } from 'react-native-paper';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CustomButtons from '../components/utils/CustomButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileAction,logoutAction } from '../components/redux/actions/authActions';
 import Config from '../components/utils/Config';
-// import GlobalStyle from '../components/utils/GlobalStyle';
+import GlobalStyle from '../components/utils/GlobalStyle';
 
 function Profile() {    
 
@@ -57,10 +57,14 @@ function Profile() {
     }
 
     return (
-        <ScrollView>
-            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : ""}  style={{flex:1}}>
-                <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}>
-                    <View style={styles.profieMain}>
+        <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : ""} 
+            style={{flex:1}}
+            keyboardVerticalOffset={Platform.OS === 'ios' && 90}
+        >
+            <ScrollView>
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                    <View style={{flex:1}}>
                         <Card>
                             <Card.Content>
                                 {/* <FontAwesome5 
@@ -70,7 +74,7 @@ function Profile() {
                                 style={{marginBottom:20,textAlign:'center'}}
                                 /> */}
                                 <Image                             
-                                    style={{height:100,width:100,borderRadius:50,alignSelf:'center',marginBottom:20}}                                                                 
+                                    style={[GlobalStyle.avatar,{marginBottom:20}]}
                                     source={(userimage !== null) ? {uri:userimage} : require('../assets/user.png')} 
                                 />
                                 <TextInput
@@ -124,18 +128,13 @@ function Profile() {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
-        </ScrollView>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
 // const GStyle = GlobalStyle;
-const styles = StyleSheet.create({
-    profieMain:{
-        flex:1,
-        marginVertical:30,
-        // backgroundColor:GStyle.secondarycolor.color,
-    },
+const styles = StyleSheet.create({    
     action : {
         marginVertical:16,
         justifyContent:'center'

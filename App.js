@@ -89,7 +89,7 @@ const App = () => {
     <PaperProvider theme={theme}>
       <Fragment>
         <Nav color={theme.colors.primary} refer={navigationRef}/>        
-        {/* <Spinner/> */}
+        <Spinner/>
       </Fragment>
     </PaperProvider>
   );

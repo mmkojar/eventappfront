@@ -37,10 +37,11 @@ function AttendeeProfile({ route, navigation }) {
                         left={(props) =>  <Text {...props} style={styles.leftText}>Company</Text>}
                         leftStyle={styles.left}
                     />
-                    <Subheading style={{textAlign:'center',marginVertical:14}}>-----------------Connect Via-----------------</Subheading>
+                    <Caption></Caption>
+                    {/* <Subheading style={{textAlign:'center',marginVertical:14}}>-----------------Connect Via-----------------</Subheading> */}
                     <View style={{marginHorizontal:8}}>
-                        <CustomButtons title="Request Meeting" pressHandler={()=>{}} ></CustomButtons>
-                        <Subheading style={{textAlign:'center',marginVertical:6}}>OR</Subheading>
+                        {/* <CustomButtons title="Request Meeting" pressHandler={()=>{}} ></CustomButtons> */}
+                        {/* <Subheading style={{textAlign:'center',marginVertical:6}}>OR</Subheading> */}
                         <CustomButtons title="Chat" pressHandler={pressHandler}></CustomButtons>
                     </View>
                 </View>
@@ -53,12 +54,12 @@ function AttendeeProfile({ route, navigation }) {
 const styles = StyleSheet.create({
     profieMain : {
         flex:1,
-        marginVertical:30,
+        marginVertical:20,
     },
     left:{        
         marginLeft:-15,
         borderRadius:50,
-        minHeight:60,
+        minHeight:50,
         width:90,
         backgroundColor:GStyle.primarycolor.color
     },

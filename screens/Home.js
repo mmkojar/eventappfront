@@ -137,7 +137,7 @@ function Home({ navigation }) {
                             <Text style={styles.textMain}>Exhibitors</Text>
                         </Card>
                     </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Gallery')}> 
+                    {/* <Pressable onPress={() => navigation.navigate('Gallery')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}
@@ -146,7 +146,7 @@ function Home({ navigation }) {
                             </Image>
                             <Text style={styles.textMain}>Gallery</Text>
                         </Card>
-                    </Pressable>
+                    </Pressable> */}
                     
                     <Pressable onPress={() => navigation.navigate('FAQ')}>
                         <Card style={styles.innerItem} elevation={3}>

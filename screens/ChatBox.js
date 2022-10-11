@@ -54,7 +54,6 @@ const ChatBox = ({ route, navigation }) => {
     const pressHandler = () => {
         dispatch(sendMessage(authData.data.user_id,receiver_id,message));        
         Setmessage('');
-        Keyboard.dismiss();
     }
 
     // For Notification handles
@@ -96,8 +95,11 @@ const ChatBox = ({ route, navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : ""} style={{flex:1}}>
-            <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}>
+        <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : ""} style={{flex:1}}
+            keyboardVerticalOffset={Platform.OS === 'ios' && 90}
+        >
+            {/* <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}> */}
                 <View style={styles.Main}>
                     <FlatList
                         keyExtractor={(item) => item.chat_detail_id}
@@ -127,7 +129,7 @@ const ChatBox = ({ route, navigation }) => {
                         right={<TextInput.Icon name="send" onPress={pressHandler} disabled={message == 'null' ? true : false}/>}
                     />
                 </View>
-            </TouchableWithoutFeedback>
+            {/* </TouchableWithoutFeedback> */}
         </KeyboardAvoidingView>
     )
 }
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
         padding:12,
         margin:4,        
         borderRadius:20,
-        justifyContent:'flex-start',
+        // justifyContent:'flex-start',
         backgroundColor:GStyle.primarycolor.color,
         alignSelf:'flex-start',
     },
