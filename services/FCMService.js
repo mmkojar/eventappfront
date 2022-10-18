@@ -2,6 +2,7 @@ import messaging from '@react-native-firebase/messaging';
 import { Platform } from 'react-native';
 import { localNotificationService } from './LocalNotificationService';
 
+
 class FCMService {
     register  (onRegister, onNotification, onOpenNotification) {
         this.checkPermission(onRegister);
@@ -131,10 +132,6 @@ class FCMService {
             console.log('sdfghjkldfgh', "stopAlarmRing");
         }
     }
-
-
-
-
 }
 
 export const fcmService = new FCMService()

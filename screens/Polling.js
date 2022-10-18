@@ -33,9 +33,9 @@ const Polling = ({ navigation }) => {
               renderItem={({item}) => (
                   <Pressable onPress={() => pressHandler(item.id)}>                      
                       <Card.Title
-                            style={[GlobalStyle.cardTitle,{backgroundColor:GlobalStyle.primarycolor.color}]}
+                            style={[GlobalStyle.cardTitle,{backgroundColor:GlobalStyle.secondarycolor.color}]}
                             title={item.title}
-                            titleStyle={{marginTop:0,color:'#fff'}}
+                            titleStyle={{marginTop:0,color:GlobalStyle.primarycolor.color}}
                         />
                   </Pressable>
               )}

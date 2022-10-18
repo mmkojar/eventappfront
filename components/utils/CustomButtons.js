@@ -5,7 +5,7 @@ import { Button, withTheme } from 'react-native-paper';
 function CustomButtons({theme,title,pressHandler}) {
     return (
         <View>            
-             <Button mode="contained" labelStyle={{fontSize:16}} uppercase={false} style={styles.c_button} color={title == 'Logout' ? '#dc3545' : theme.colors.primary} onPress={pressHandler}>
+             <Button mode="contained" labelStyle={{fontSize:17}} uppercase={false} style={styles.c_button} color={title == 'Logout' ? '#dc3545' : theme.colors.primary} onPress={pressHandler}>
                 {title}
             </Button>
         </View>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:8,
         paddingVertical:3,
         borderRadius:20,
-        fontWeight:900,                
+        fontWeight:900,
     }
 })
 

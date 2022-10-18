@@ -1,6 +1,8 @@
 import React from 'react'
 import { View,Image,StyleSheet,ScrollView,TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Card, Text, Caption, Subheading  } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendMettingRequest } from '../components/redux/actions/chatActions';
 import CustomButtons from '../components/utils/CustomButtons';
 import GlobalStyle from '../components/utils/GlobalStyle';
 
@@ -9,6 +11,7 @@ const GStyle = GlobalStyle;
 function AttendeeProfile({ route, navigation }) {
 
     const { id, full_name,company,user_image } = route.params;
+    const authData = useSelector((state) => state.auth);
 
     const pressHandler = () => {
         navigation.navigate('ChatBox', {
@@ -16,10 +19,16 @@ function AttendeeProfile({ route, navigation }) {
             full_name: full_name,
         });
     }
+
+    const dispatch = useDispatch();
+    const mettinghandler = () => {
+        dispatch(sendMettingRequest(authData.data.user_id,id));
+    }
+
     return (
         <ScrollView>
             <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}>
-                <View style={styles.profieMain}>                    
+                <View style={styles.profieMain}>
                     <Image                             
                         style={{height:120,width:120,borderRadius:50,alignSelf:'center',marginVertical:20}}
                         source={(user_image !== null) ? {uri:user_image} : require('../assets/user.png')}
@@ -38,10 +47,10 @@ function AttendeeProfile({ route, navigation }) {
                         leftStyle={styles.left}
                     />
                     <Caption></Caption>
-                    {/* <Subheading style={{textAlign:'center',marginVertical:14}}>-----------------Connect Via-----------------</Subheading> */}
+                    <Subheading style={{textAlign:'center',marginVertical:14}}>-----------------Connect Via-----------------</Subheading>
                     <View style={{marginHorizontal:8}}>
-                        {/* <CustomButtons title="Request Meeting" pressHandler={()=>{}} ></CustomButtons> */}
-                        {/* <Subheading style={{textAlign:'center',marginVertical:6}}>OR</Subheading> */}
+                        <CustomButtons title="Request Meeting" pressHandler={mettinghandler} ></CustomButtons>
+                        <Subheading style={{textAlign:'center',marginVertical:6}}>OR</Subheading>
                         <CustomButtons title="Chat" pressHandler={pressHandler}></CustomButtons>
                     </View>
                 </View>

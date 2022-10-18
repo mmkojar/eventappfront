@@ -1,12 +1,11 @@
 import React, { useState,useEffect } from 'react';
-import {  View, Text, StyleSheet, Alert, ImageBackground, Platform, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
-import { Card, TextInput } from 'react-native-paper';
+import {  View, TextInput, StyleSheet, Alert, Platform, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Image } from 'react-native';
+import { Card } from 'react-native-paper';
 import CustomButtons from '../components/utils/CustomButtons';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../components/redux/actions/authActions';
-import messaging from '@react-native-firebase/messaging';
-import PushNotification from 'react-native-push-notification';
 import { fcmService } from '../services/FCMService';
+import GlobalStyle from '../components/utils/GlobalStyle';
 
 function Login() {
 
@@ -38,24 +37,29 @@ function Login() {
     }
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex:1}} >
-            <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex:1}}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <View style={styles.loginMain}>
                     {/* <ImageBackground source={require('../assets/login_screen.png')} resizeMode="cover" style={{flex: 1,justifyContent:'flex-end'}}>                     */}
                         <Card style={styles.card}>
-                            <Text style={styles.heading}>Login To Continue !</Text> 
+                            <Image                             
+                                style={{height:120,width:120,alignSelf:'center'}}
+                                source={require('../assets/logo.png')}
+                            />   
+                            {/* <Text style={styles.heading}>Login To Continue !</Text> */}
                             <Card.Content>
                                 <TextInput
-                                    mode='outlined'
-                                    label='Enter Email'
+                                    style={[GlobalStyle.textinput,{marginVertical:30,borderWidth:1}]}
                                     onChangeText={(val) => SetIdentity(val)}
+                                    placeholder="Enter Email"
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='email-address'
-                                    style={styles.textinput}
+                                    value={identity}
                                 />
                             </Card.Content>
-                            <Card.Actions style={styles.action}>
+                            <View style={styles.action}>
                                 <CustomButtons title="Login" pressHandler={pressHandler}></CustomButtons>
-                            </Card.Actions>                        
+                            </View>
                         </Card>
                     {/* </ImageBackground> */}
                 </View>
@@ -68,26 +72,23 @@ const styles = StyleSheet.create({
     loginMain:{
         flex:1,
         justifyContent:'flex-end',
-        backgroundColor:'#16191a',
+        backgroundColor:'#1C75BC',
     },
     card:{
         paddingBottom:100,
         paddingTop:50,
-        borderWidth:1,
-        // borderRadius:20,
+        // borderWidth:1,
         borderTopLeftRadius:50,
-        // marginTop:100
     },
-    heading: {
+    /* heading: {
         fontSize:30,
         textAlign:'center',
         marginVertical:30,
-        color:'#000000',
-        fontFamily:'VarelaRound-Regular'
-    },
+        color:GlobalStyle.primarycolor.color,
+    }, */
     action : {
-        marginTop:30,
-        justifyContent:'center'
+        width:'50%',
+        alignSelf:'center',
     }
 })
 

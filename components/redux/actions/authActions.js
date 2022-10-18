@@ -39,7 +39,7 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
 
     const formdata = JSON.stringify({device_notification_id,devicetype,identity})
     axios.post(api_url+'login', formdata, config)
-    .then((res) => {       
+    .then((res) => {
         // console.log(res);
         if(res.data.status === "true") {
             dispatch({
@@ -48,7 +48,7 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
             });
             AsyncStorage.setItem('userId',res.data.data.user_id);
         }
-        if(res.data.status === "false") {        
+        if(res.data.status === "false") {
             dispatch({
                 type: LOGIN_FAIL,
             });
@@ -133,6 +133,28 @@ export const profileAction = (id,first_name,last_name,phone,email,city) => (disp
         alert(err);
     });
 };
+
+export const checkToken = (token) => (dispatch) => {
+    dispatch({
+        type: START_LOADER,
+    });
+    axios.get(api_url+`user/checktoken/${token}`, config)
+    .then((res) => {     
+        // console.log(res.data);
+        if(res && res.data.status == 'false') {
+          dispatch(logoutAction());
+        }
+        dispatch({
+            type: STOP_LOADER,
+        });
+    })
+    .catch((err) => {
+        dispatch({
+            type: STOP_LOADER,
+        });
+        alert(err);
+    });
+  }
 
 // ------Logout Action------
 export const logoutAction = () => (dispatch) => {

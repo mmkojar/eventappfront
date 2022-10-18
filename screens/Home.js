@@ -8,15 +8,15 @@ function Home({ navigation }) {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            // headerLeft: () => (
-            //     <View>
-            //         <Image
-            //             style={{height:40,width:40,marginLeft:8}}
-            //             source={require('../assets/logo.png')}
-            //         >
-            //         </Image>
-            //     </View>
-            // ),
+            headerLeft: () => (
+                <View>
+                    <Image
+                        style={{height:40,width:40,marginLeft:8}}
+                        source={require('../assets/homelogo.png')}
+                    >
+                    </Image>
+                </View>
+            ),
             headerRight: () => (
               <View>
                   <Button onPress={() => {

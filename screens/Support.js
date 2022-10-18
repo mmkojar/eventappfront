@@ -12,11 +12,11 @@ function Support({}) {
             <View style={{marginBottom:10}}>
                 <Card.Title
                     style={GlobalStyle.topContent}
-                    title='Hotel Booking'
-                    titleStyle={{color:'#fff'}}
+                    title='Event Manager'
+                    titleStyle={{color:'#fff',fontSize:18}}
                 />
                 <Card.Content style={GlobalStyle.bottomContent}>
-                    <Title>Name: Shaunak Karade</Title>
+                    <Subheading>Name: Shaunak Karade</Subheading>
                     <Subheading onPress={()=>{Linking.openURL('tel:9833431053');}}>Call: +91 9833431053</Subheading>
                 </Card.Content>
             </View>
@@ -24,10 +24,10 @@ function Support({}) {
                 <Card.Title
                     style={GlobalStyle.topContent}
                     title='Web Assistance'
-                    titleStyle={{color:'#fff'}}
+                    titleStyle={{color:'#fff',fontSize:18}}
                 />
                 <Card.Content style={GlobalStyle.bottomContent}>
-                    <Title>Name: Mohammed Kojar</Title>
+                    <Subheading>Name: Mohammed Kojar</Subheading>
                     <Subheading onPress={()=>{Linking.openURL('tel:9769337909');}}>Call: +91 9769337909</Subheading>
                 </Card.Content>
             </View>

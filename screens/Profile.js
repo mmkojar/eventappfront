@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
-import { View, Image, StyleSheet, ScrollView, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
-import { Text,Card,TextInput } from 'react-native-paper';
+import { View, Image, TextInput, StyleSheet, ScrollView, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text,Card } from 'react-native-paper';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CustomButtons from '../components/utils/CustomButtons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,13 +57,14 @@ function Profile() {
     }
 
     return (
+       
         <KeyboardAvoidingView 
-            behavior={Platform.OS === "ios" ? "padding" : ""} 
-            style={{flex:1}}
-            keyboardVerticalOffset={Platform.OS === 'ios' && 90}
+            behavior={Platform.OS === "ios" ? "padding" : ""}
+            style={{flex: 1}}            
+            keyboardVerticalOffset={Platform.OS === 'ios' && 100}
         >
             <ScrollView>
-                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                {/* <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> */}
                     <View style={{flex:1}}>
                         <Card>
                             <Card.Content>
@@ -74,28 +75,34 @@ function Profile() {
                                 style={{marginBottom:20,textAlign:'center'}}
                                 /> */}
                                 <Image                             
-                                    style={[GlobalStyle.avatar,{marginBottom:20}]}
+                                    style={[GlobalStyle.avatar,{marginBottom:24}]}
                                     source={(userimage !== null) ? {uri:userimage} : require('../assets/user.png')} 
-                                />
+                                />                                
                                 <TextInput
-                                    mode='outlined'
-                                    label='First Name'
+                                    style={[GlobalStyle.textinput,{backgroundColor:GlobalStyle.secondarycolor.color}]}
+                                    editable={false}
+                                    placeholder='First Name'
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='default'
                                     value={firstname}
                                     onChangeText={(val) => Setfirstname(val)}
                                 />
                                 <Text></Text>
                                 <TextInput
-                                    mode='outlined'
-                                    label='Last Name'
+                                    style={[GlobalStyle.textinput,{backgroundColor:GlobalStyle.secondarycolor.color}]}
+                                    editable={false}
+                                    placeholder='Last Name'
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='default'
                                     value={lastname}
                                     onChangeText={(val) => Setlastname(val)}
                                 />
                                 <Text></Text>
                                 <TextInput
-                                    mode='outlined'
-                                    label='Enter Email'
+                                    style={[GlobalStyle.textinput,{backgroundColor:GlobalStyle.secondarycolor.color}]}
+                                    editable={false}
+                                    placeholder='Enter Email'
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='email-address'
                                     value={email}
                                     onChangeText={(val) => SetEmail(val)}
@@ -103,8 +110,9 @@ function Profile() {
                                 />
                                 <Text></Text>
                                 <TextInput
-                                    mode='outlined'
-                                    label='Phone'
+                                    style={GlobalStyle.textinput}
+                                    placeholder='Phone'
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='number-pad'
                                     value={phone}
                                     onChangeText={(val) => SetPhone(val)}
@@ -112,8 +120,9 @@ function Profile() {
                                 />
                                 <Text></Text>
                                 <TextInput
-                                    mode='outlined'
-                                    label='City'
+                                    style={GlobalStyle.textinput}
+                                    placeholder='City'
+                                    placeholderTextColor={GlobalStyle.primarycolor.color}
                                     keyboardType='default'
                                     value={city}
                                     onChangeText={(val) => SetCity(val)}
@@ -127,7 +136,7 @@ function Profile() {
                             <CustomButtons title="Logout" pressHandler={logout}></CustomButtons>
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
+                {/* </TouchableWithoutFeedback>           */}
             </ScrollView>
         </KeyboardAvoidingView>
     )

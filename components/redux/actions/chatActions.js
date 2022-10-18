@@ -114,3 +114,30 @@ export const sendMessage = (user_id,receiver_id,message) => (dispatch) => {
         alert(err);
     });    
 }
+
+// ------Meeting Request------
+export const sendMettingRequest = (user_id,receiver_id) => (dispatch) => {
+
+    dispatch({
+        type: START_LOADER,
+    });
+    const formdata = JSON.stringify({"user_id":user_id,"receiver_id":receiver_id})
+    axios.post(api_url+'chat/send_meeting_request', formdata ,config)
+    .then((res) => {
+        if(res.data && res.data.status === "true") {
+            alert(res.data.message)
+        }
+        else {
+            alert(res.data.message)
+        }
+        dispatch({
+            type: STOP_LOADER,
+        });
+    })
+    .catch((err) => {
+        dispatch({
+            type: STOP_LOADER,
+        });
+        alert(err);
+    });    
+}

@@ -34,7 +34,7 @@ const GlobalStyle = StyleSheet.create({
     topContent:{        
         backgroundColor:theme.colors.primary,
         marginHorizontal:8,
-        minHeight:60,
+        minHeight:50,
         borderTopLeftRadius:20,
         borderTopRightRadius:20
     },
@@ -59,6 +59,16 @@ const GlobalStyle = StyleSheet.create({
         color:theme.colors.primary,
         textAlign:'center',        
         marginBottom:0,
+    },
+    textinput:{
+        height: 55,        
+        borderColor:theme.colors.primary,
+        color:theme.colors.primary,
+        fontSize:17,
+        borderWidth: 0.8,
+        borderRadius:10,
+        padding: 16,
+        fontFamily:'VarelaRound-Regular'
     },
     customFont:{
         fontFamily:'VarelaRound-Regular'

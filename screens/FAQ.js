@@ -16,7 +16,7 @@ function FAQ() {
     }, [dispatch])
 
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
     const [eid,setEid] = React.useState();
 
     const handlePress = (item) => {
