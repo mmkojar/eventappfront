@@ -280,7 +280,7 @@ PODS:
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
-  - react-native-webview (11.15.1):
+  - react-native-webview (11.23.1):
     - React-Core
   - React-perflogger (0.66.4)
   - React-RCTActionSheet (0.66.4):
@@ -364,7 +364,7 @@ PODS:
     - React-Core
   - RNPermissions (3.6.1):
     - React-Core
-  - RNScreens (3.10.1):
+  - RNScreens (3.18.2):
     - React-Core
     - React-RCTImage
   - RNVectorIcons (9.0.0):
@@ -558,7 +558,7 @@ SPEC CHECKSUMS:
   react-native-camera: 210a872c84d3aa0982a9223047ef9e743ed694fa
   react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-webview: 6ff12d99d519224fade77d1569e31f2762f33f9f
+  react-native-webview: a192040320142d8f10d652a745c46e4f43e37f8c
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
@@ -578,7 +578,7 @@ SPEC CHECKSUMS:
   RNFBMessaging: e36dd4e6ce0858d256055d062ad16eca54bb3118
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
   RNPermissions: 79d0c889562fd792329821bea3155fe6eb54d359
-  RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
+  RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 

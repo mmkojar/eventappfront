@@ -6,10 +6,11 @@ import { getPollView, updatePolls } from '../components/redux/actions/delegateAc
 import axios from 'axios';
 import Config from '../components/utils/Config';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 const PollView = ({ route }) => {
-
+  
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
      
     const authData = useSelector((state) => state.auth);
@@ -73,8 +74,8 @@ const PollView = ({ route }) => {
               <Pressable onPress={() => handlePollSubmit(item)} disabled={(choiceById && choiceById) ? true : false}>
               {
                 (item.votes > 0) ?
-                <View style={[styles.resultbar]}>
-                    <Text style={[styles.percent,{width:`${Math.round((item.votes/item.total_votes)*100)}%`}]}>
+                <View style={[styles.resultbar,{backgroundColor:GlobalStyle.secondarycolor.color}]}>
+                    <Text style={[styles.percent,{backgroundColor:GlobalStyle.primarycolor.color,width:`${Math.round((item.votes/item.total_votes)*100)}%`}]}>
                       {`${Math.round((item.votes/item.total_votes)*100)}%`}
                       {
                           (choiceById === item.paid) ? 
@@ -87,8 +88,8 @@ const PollView = ({ route }) => {
                       }
                     </Text>
                 </View>
-                : <View style={[styles.resultbar]}>
-                    <Text style={[styles.percent,{width:'0%'}]}>0%</Text>
+                : <View style={[styles.resultbar,{backgroundColor:GlobalStyle.secondarycolor.color}]}>
+                    <Text style={[styles.percent,{width:'0%',backgroundColor:GlobalStyle.primarycolor.color}]}>0%</Text>
                   </View>
               }        
               </Pressable>
@@ -100,14 +101,11 @@ const PollView = ({ route }) => {
     )
 }
 
-const GStyle = GlobalStyle;
-
 const styles = StyleSheet.create({  
   resultbar:{
     marginVertical:8,
     height:50,
-    borderRadius:50,
-    backgroundColor:GlobalStyle.secondarycolor.color
+    borderRadius:20,
   },
 
   percent:{
@@ -115,9 +113,8 @@ const styles = StyleSheet.create({
     color:'#fff',
     fontSize:18, 
     height:50,
-    lineHeight:50,  
-    backgroundColor:GStyle.primarycolor.color,
-    borderRadius:50,
+    lineHeight:50,
+    borderRadius:20,
     textAlign:'center',
   }
 })

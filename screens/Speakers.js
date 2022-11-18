@@ -5,10 +5,11 @@ import { Caption, Card, Paragraph} from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpeakers } from '../components/redux/actions/delegateActions';
 import Config from '../components/utils/Config';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function Speakers() {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const result = useSelector((state) => state.delegate);
     const { speaker } = result;

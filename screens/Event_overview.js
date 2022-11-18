@@ -3,10 +3,11 @@ import {  View,FlatList } from 'react-native';
 import { Card,Subheading } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAboutEvent } from '../components/redux/actions/delegateActions';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 const Event_overview = () => {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
 
     useEffect(() => {  

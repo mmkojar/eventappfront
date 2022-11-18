@@ -4,12 +4,11 @@ import { Avatar, Card,IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChatHistory } from '../components/redux/actions/chatActions';
 import Config from '../components/utils/Config';
-import GlobalStyle from '../components/utils/GlobalStyle';
-
-const GStyle = GlobalStyle;
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 const ChatList = ({ navigation }) => {
 
+    const [theme,GlobalStyle,themeoptions] = useThemeStyle();
     const dispatch = useDispatch();
     const chathistory = useSelector((state) => state.chats.chathistory);
     const authData = useSelector((state) => state.auth);
@@ -33,21 +32,23 @@ const ChatList = ({ navigation }) => {
         });
     }
 
+    const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
+
     return (
-        <View style={GStyle.container}>
+        <View style={GlobalStyle.container}>
             <FlatList
                 keyExtractor={(item) => item.chat_detail_id}            
                 data={chathistory}
                 renderItem={({item}) => (
                     <Pressable onPress={() => pressHandler(item)}>
                         <Card.Title              
-                            style={GStyle.cardTitle}
+                            style={GlobalStyle.cardTitle}
                             title={item.user_name}
                             titleStyle={{marginTop:0}}
                             subtitle={item.company ? item.company : 'Company Name'}
                             subtitleStyle={{color:'#000'}}
-                            left={(props) => <Avatar.Image {...props} size={42} source={(Config.imgurl+item.user_image !== null) ? {uri:Config.imgurl+item.user_image} : require('../assets/user.png')} />}                                
-                            right={(props) => <IconButton {...props} size={30} icon="arrow-right" color={GStyle.primarycolor.color} onPress={() => pressHandler(item)} />}
+                            left={(props) => <Avatar.Image {...props} size={42} source={(item.user_image !== null) ? {uri:Config.imgurl+item.user_image} : du_image} />}
+                            right={(props) => <IconButton {...props} size={30} icon="arrow-right" color={GlobalStyle.primarycolor.color} onPress={() => pressHandler(item)} />}
                         />
                     </Pressable >
                 )}

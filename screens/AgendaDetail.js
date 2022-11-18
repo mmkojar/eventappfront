@@ -1,10 +1,11 @@
 import React from 'react'
 import {  View } from 'react-native';
 import { Card,Title,Subheading } from 'react-native-paper';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function AgendaDetail({route}) {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const { name, date, time, speaker_name, venue } = route.params;
 
     return (

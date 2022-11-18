@@ -1,32 +1,35 @@
-import React,{Fragment } from 'react';
-import { Provider as PaperProvider,withTheme } from 'react-native-paper';
+import React, { Fragment, useEffect } from 'react';
+import { Provider as PaperProvider, withTheme } from 'react-native-paper';
 import Nav from './components/Nav';
 import Spinner from './components/utils/Spinner';
-import { navigationRef,navigate } from './services/RootNavigation';
+import { navigationRef, navigate } from './services/RootNavigation';
 import { localNotificationService } from './services/LocalNotificationService';
 import { fcmService } from './services/FCMService';
 import { checkToken } from './components/redux/actions/authActions';
-import { theme } from './components/utils/ThemeStyle';
 import SplashScreen from 'react-native-splash-screen'
 import factory from './components/redux/store';
+import useThemeStyle from './components/utils/useThemeStyle';
 
-const { store } = factory(); 
+const { store } = factory();
 
-class App extends React.Component {
+const App = () => {
  
-  componentDidMount() {
-    fcmService.registerAppWithFCM();
-    fcmService.register(this.onRegister,this.onNotification,this.onOpenNotification)
-    localNotificationService.configure(this.onOpenNotification);
-    // localNotificationService.getAllChannels();
-    SplashScreen.hide();
-  }
+  const [theme ] = useThemeStyle();
 
-  onRegister = (res) => {    
+  useEffect(() => {
+    fcmService.registerAppWithFCM();
+    fcmService.register(onRegister,onNotification,onOpenNotification)
+    localNotificationService.createChannel()
+    localNotificationService.configure(onOpenNotification);
+    console.log(localNotificationService.getAllChannels());
+    SplashScreen.hide();
+  },[])   
+
+  const onRegister = (res) => {
     store.dispatch(checkToken(res));
   }
 
-  onNotification = (notify) => {
+  const onNotification = (notify) => {
     const options = {
       soundName: 'default',
       playSound: true,
@@ -42,7 +45,7 @@ class App extends React.Component {
     // }
   }; 
   
-  onOpenNotification = async (notify) => {
+  const onOpenNotification = async (notify) => {
     // check for auth    
     console.log("notify:",notify);
     if(notify.userInteraction == true) { 
@@ -58,7 +61,6 @@ class App extends React.Component {
     }
   };
 
-  render() {
     return (
       <PaperProvider theme={theme}>
         <Fragment>
@@ -67,7 +69,6 @@ class App extends React.Component {
         </Fragment>
       </PaperProvider>
     );
-  }
 };
 
 

@@ -5,10 +5,11 @@ import { Card, Text, Paragraph, withTheme, Caption } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExhibitors } from '../components/redux/actions/delegateActions';
 import Config from '../components/utils/Config';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
-function Exhibitors({theme}) {
+function Exhibitors() {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const result = useSelector((state) => state.delegate);
     const { exhibitors } = result;
@@ -29,7 +30,7 @@ function Exhibitors({theme}) {
                             <Image source={{uri: Config.imgurl+item.ex_image}} style={GlobalStyle.avatar}/>                       
                             <Card.Content style={GlobalStyle.carContent}>
                                 <Paragraph style={[GlobalStyle.layoutPara,{fontSize:18,marginTop:6}]}>{item.ex_name}</Paragraph>
-                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.web_url)}><Text style={{color:theme.colors.primary}} >{item.web_url}</Text></Caption>
+                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.web_url)}><Text style={{color:GlobalStyle.primarycolor.color}} >{item.web_url}</Text></Caption>
                             </Card.Content>
                         </Card>
                     </Fragment>

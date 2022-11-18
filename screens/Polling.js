@@ -3,11 +3,12 @@ import { View,  StyleSheet, FlatList, Pressable } from "react-native";
 import { Title,Headline, Card } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPollsList } from '../components/redux/actions/delegateActions';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 
 const Polling = ({ navigation }) => {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const pollslist = useSelector((state) => state.delegate.polls);  
    

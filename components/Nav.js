@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { NavigationContainer  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,11 +23,14 @@ import SupportScreen from '../screens/Support';
 import PollsScreen from '../screens/Polling';
 import PollViewScreen from '../screens/PollView';
 import ScanQR from '../screens/ScanQR';
+import useThemeStyle from './utils/useThemeStyle';
 
 const Stack = createStackNavigator();
 
 const Nav = ({color, refer}) => {
-  
+     
+  const [theme,GlobalStyle, themeoptions] = useThemeStyle();
+
   const authData = useSelector((state) => state.auth);
   const { isAuthenticated } = authData;
   
@@ -41,7 +44,7 @@ const Nav = ({color, refer}) => {
                     backgroundColor: color,
                 },
                 headerTintColor:'#fff',
-                headerTitleAlign:'center',                
+                headerTitleAlign:'center',
                 headerTitleStyle: {
                     fontFamily:'VarelaRound-Regular'
                 },
@@ -52,7 +55,7 @@ const Nav = ({color, refer}) => {
             >
             <Stack.Screen name="Home" component={HomeScreen}
                 options={{
-                title:'Event App',
+                title:themeoptions.app_title,
                 }} 
             /> 
             <Stack.Screen name="Profile" component={ProfileScreen} 

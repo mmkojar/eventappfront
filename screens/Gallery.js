@@ -1,9 +1,10 @@
 import React from 'react'
-import { WebView } from 'react-native-webview';
+// import { WebView } from 'react-native-webview';
 
 function Gallery() {
     return (
-       <WebView source={{ uri: 'http://vsss2.info2ideas.com/gallery' }} />
+    //    <WebView source={{ uri: 'http://vsss2.info2ideas.com/gallery' }} />
+        <></>
     )
 }
 

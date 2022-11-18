@@ -56,7 +56,6 @@ export const getChatHistory = (userid) => (dispatch) => {
     
     axios.post(api_url+'chat/chat_history', formdata ,config)
     .then((res) => {
-        console.log(res.data);
         if(res.data && res.data.status === "true") {
             dispatch({
                 type: GET_USER_CHATS,

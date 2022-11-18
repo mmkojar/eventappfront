@@ -5,10 +5,12 @@ import CustomButtons from '../components/utils/CustomButtons';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../components/redux/actions/authActions';
 import { fcmService } from '../services/FCMService';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
+import Config from '../components/utils/Config';
 
 function Login() {
 
+    const [theme,GlobalStyle,themeoptions] = useThemeStyle();
     useEffect(() => {
         fcmService.getToken(onRegister)
     }, [])
@@ -21,7 +23,7 @@ function Login() {
     const [token,SetToken] = useState('');
 
     const dispatch = useDispatch();
-
+    
     const pressHandler = (e) => {
         
         e.preventDefault();
@@ -31,20 +33,21 @@ function Login() {
               ],{cancelable:true})
         }
         else {            
-            Keyboard.dismiss();
+            Keyboard.dismiss();            
+            // console.log(token);
             dispatch(loginAction(token,Platform.OS,identity));
         }
     }
-
+    
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex:1}}>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <View style={styles.loginMain}>
-                    {/* <ImageBackground source={require('../assets/login_screen.png')} resizeMode="cover" style={{flex: 1,justifyContent:'flex-end'}}>                     */}
+                    {/* <ImageBackground source={require('../assets/login_screen.png')} resizeMode="cover" style={{flex: 1,justifyContent:'flex-end'}}>*/}
                         <Card style={styles.card}>
-                            <Image                             
+                            <Image
                                 style={{height:120,width:120,alignSelf:'center'}}
-                                source={require('../assets/logo.png')}
+                                source={(themeoptions && themeoptions.lc_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo)} : require('../assets/logo.png')}
                             />   
                             {/* <Text style={styles.heading}>Login To Continue !</Text> */}
                             <Card.Content>

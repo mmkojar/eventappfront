@@ -1,12 +1,13 @@
 import React,{ useEffect } from 'react'
 import {  View,FlatList, Pressable, StyleSheet } from 'react-native';
-import { Caption, Card,IconButton,Text } from 'react-native-paper';
+import { Card,IconButton,Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAgenda } from '../components/redux/actions/delegateActions';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function Agenda({navigation}) {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const result = useSelector((state) => state.delegate);
     const { agenda } = result;
@@ -42,7 +43,7 @@ function Agenda({navigation}) {
                                 left={(props) => <IconButton {...props} size={24} icon="send" color={GlobalStyle.primarycolor.color} onPress={() => pressHandler(item)} />}
                                 leftStyle={{marginLeft:-10}}
                                 right={(props) =>  <Text {...props} style={styles.rightText}>{item.agenda_date}{"\n"}{item.agenda_time}</Text>}
-                                rightStyle={styles.right}
+                                rightStyle={[styles.right,{backgroundColor:GlobalStyle.primarycolor.color}]}
                             />
                         </Pressable>
                 )}
@@ -63,7 +64,6 @@ const styles = StyleSheet.create({
         // widht:90,
         borderRadius:50,
         minHeight:60,
-        backgroundColor:GlobalStyle.primarycolor.color,
         textAlignVertical:'center',
     },
     rightText:{

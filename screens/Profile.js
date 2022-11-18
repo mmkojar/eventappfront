@@ -6,10 +6,11 @@ import CustomButtons from '../components/utils/CustomButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileAction,logoutAction } from '../components/redux/actions/authActions';
 import Config from '../components/utils/Config';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function Profile() {    
 
+    const [theme,GlobalStyle,themeoptions] = useThemeStyle();
     const dispatch = useDispatch();
     const authData = useSelector((state) => state.auth);       
     
@@ -20,7 +21,7 @@ function Profile() {
     const [city,SetCity] = useState(authData.data.city);
     // const [userimage,SetUserImage] = useState(authData.data.user_image);
 
-    const userimage = Config.imgurl+authData.data.image;
+    const userimage = authData.data.image;
     
     const customAlert = (msg) => {
         Alert.alert('Error',msg,[
@@ -33,7 +34,7 @@ function Profile() {
         e.preventDefault();
         
         if(firstname == '') {
-            customAlert('Enter First Name');            
+            customAlert('Enter First Name');
         }
         else if(lastname == '') {
             customAlert('Enter Last Name');            
@@ -56,6 +57,8 @@ function Profile() {
         ],{cancelable:true})
     }
 
+    const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
+    
     return (
        
         <KeyboardAvoidingView 
@@ -74,10 +77,10 @@ function Profile() {
                                 color='#000'
                                 style={{marginBottom:20,textAlign:'center'}}
                                 /> */}
-                                <Image                             
+                                <Image
                                     style={[GlobalStyle.avatar,{marginBottom:24}]}
-                                    source={(userimage !== null) ? {uri:userimage} : require('../assets/user.png')} 
-                                />                                
+                                    source={(userimage !== null) ? {uri:Config.imgurl+userimage} : du_image} 
+                                />
                                 <TextInput
                                     style={[GlobalStyle.textinput,{backgroundColor:GlobalStyle.secondarycolor.color}]}
                                     editable={false}

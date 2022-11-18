@@ -5,10 +5,11 @@ import { Text,Card,Paragraph, withTheme, Caption } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSponsors } from '../components/redux/actions/delegateActions';
 import Config from '../components/utils/Config';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
-function Sponsors({theme}) {
+function Sponsors() {
 
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const result = useSelector((state) => state.delegate);
     const { sponsor } = result;
@@ -29,7 +30,7 @@ function Sponsors({theme}) {
                             <Image source={{uri: Config.imgurl+item.image}} style={GlobalStyle.avatar}/>                       
                             <Card.Content style={GlobalStyle.carContent}>
                                 <Paragraph style={[GlobalStyle.layoutPara,{fontSize:18,marginTop:6}]}>{item.name}</Paragraph>
-                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.link)}><Text style={{color:theme.colors.primary}} >{item.link}</Text></Caption>
+                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.link)}><Text style={{color:GlobalStyle.primarycolor.color}} >{item.link}</Text></Caption>
                             </Card.Content>
                         </Card>
                     </Fragment>

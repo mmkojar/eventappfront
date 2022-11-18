@@ -1,10 +1,11 @@
 import React from 'react'
 import {  Linking, View } from 'react-native';
-import { Card,Title,Subheading, Text } from 'react-native-paper';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import { Card,Subheading, Text } from 'react-native-paper';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function Support({}) {
 
+    const [theme,GlobalStyle] = useThemeStyle();
 
     return (
         <View style={GlobalStyle.container}>

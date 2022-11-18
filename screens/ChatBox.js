@@ -3,14 +3,16 @@ import { View,StyleSheet,FlatList,Keyboard, RefreshControl,KeyboardAvoidingView,
 import { Text,TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendMessage, getAllChats } from '../components/redux/actions/chatActions';
-import { START_LOADER, STOP_LOADER } from '../components/redux/actions/type';
-import GlobalStyle from '../components/utils/GlobalStyle';
+// import { START_LOADER, STOP_LOADER } from '../components/redux/actions/type';
+import useThemeStyle from '../components/utils/useThemeStyle';
 import { fcmService } from '../services/FCMService';
 import { localNotificationService } from '../services/LocalNotificationService';
 // import { navigate } from '../services/RootNavigation';
 
 const ChatBox = ({ route, navigation }) => {
     
+    const [theme,GlobalStyle] = useThemeStyle();
+
     const receiver_id = route.params.id;
     
     const dispatch = useDispatch();
@@ -109,9 +111,9 @@ const ChatBox = ({ route, navigation }) => {
                             <View>
                                 {
                                     (item.user_id == authData.data.user_id && item.receiver_id == receiver_id) ? 
-                                    <Text style={styles.rightalign}><Text style={[styles.innerText,{color:'#000'}]}>{item.message}</Text></Text> : 
+                                    <Text style={[styles.rightalign,{backgroundColor:GlobalStyle.secondarycolor.color}]}><Text style={[styles.innerText,{color:'#000'}]}>{item.message}</Text></Text> : 
                                     (item.user_id == receiver_id && item.receiver_id == authData.data.user_id) ?
-                                    <Text  style={styles.leftalign}><Text style={[styles.innerText,{color:'#fff'}]}>{item.message}</Text></Text> : 
+                                    <Text  style={[styles.leftalign,{backgroundColor:GlobalStyle.primarycolor.color}]}><Text style={[styles.innerText,{color:'#fff'}]}>{item.message}</Text></Text> : 
                                     <Text></Text>
                                 }
                             </View>
@@ -133,7 +135,6 @@ const ChatBox = ({ route, navigation }) => {
         </KeyboardAvoidingView>
     )
 }
-const GStyle = GlobalStyle
 const styles = StyleSheet.create({
     Main:{
         flex:1,
@@ -142,7 +143,6 @@ const styles = StyleSheet.create({
     rightalign:{        
         padding:12,        
         margin:4,
-        backgroundColor:GStyle.secondarycolor.color,
         borderRadius:20,
         alignSelf:'flex-end',
     },
@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
         margin:4,        
         borderRadius:20,
         // justifyContent:'flex-start',
-        backgroundColor:GStyle.primarycolor.color,
         alignSelf:'flex-start',
     },
     innerText:{

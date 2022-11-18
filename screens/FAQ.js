@@ -1,12 +1,13 @@
-import React,{ useEffect } from 'react'
-import {  View,FlatList, StyleSheet, Pressable } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, FlatList, StyleSheet, Pressable } from 'react-native';
 import { Card, IconButton, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFAQ } from '../components/redux/actions/delegateActions';
-import GlobalStyle from '../components/utils/GlobalStyle';
+import useThemeStyle from '../components/utils/useThemeStyle';
 
 function FAQ() {
-
+    
+    const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
     const result = useSelector((state) => state.delegate);
     const { faq } = result;
@@ -35,7 +36,7 @@ function FAQ() {
                     <View style={{marginBottom:10}}>
                         <Pressable onPress={() => handlePress(item)}>
                             <Card.Title
-                                style={[expanded && (eid==item.id) ? styles.ecardTitle : styles.cardTitle,styles.dcardTitle]}
+                                style={[expanded && (eid==item.id) ? styles.ecardTitle : styles.cardTitle,[styles.dcardTitle,{backgroundColor:GlobalStyle.secondarycolor.color}]]}
                                 title={item.title}
                                 titleStyle={{color:GlobalStyle.primarycolor.color}}                              
                                 right={(props) => <IconButton {...props} size={30} icon={(expanded && (eid==item.id)) ? 'chevron-up' : 'chevron-down'} color={GlobalStyle.primarycolor.color} onPress={() => handlePress(item)}/>}
@@ -59,9 +60,9 @@ function FAQ() {
 const styles = StyleSheet.create({
 
     dcardTitle:{
-        backgroundColor:GlobalStyle.secondarycolor.color,
+        // backgroundColor:GlobalStyle.secondarycolor.color,
         marginHorizontal:8,
-        minHeight:60
+        minHeight:60,
     },
     ecardTitle:{
         borderTopLeftRadius:20,

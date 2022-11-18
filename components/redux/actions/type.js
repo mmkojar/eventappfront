@@ -3,6 +3,7 @@ export const STOP_LOADER = 'STOP_LOADER';
 export const GET_MSG = 'GET_MSG';
 export const CLEAR_MSG = 'CLEAR_MSG';
 export const CLEAR_DATA = 'CLEAR_DATA';
+export const THEME_SETTINGS = 'THEME_SETTINGS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const GET_USER = 'GET_USER';
