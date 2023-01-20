@@ -40,10 +40,11 @@ const Nav = ({color, refer}) => {
         { isAuthenticated ?  (              
             <Stack.Navigator initialRouteName='Home' 
                 screenOptions={({route}) => ({
+                animationEnabled:false,
                 headerStyle: {
                     backgroundColor: color,
                 },
-                headerTintColor:'#fff',
+                headerTintColor:themeoptions.title_color,
                 headerTitleAlign:'center',
                 headerTitleStyle: {
                     fontFamily:'VarelaRound-Regular'
@@ -55,7 +56,7 @@ const Nav = ({color, refer}) => {
             >
             <Stack.Screen name="Home" component={HomeScreen}
                 options={{
-                title:themeoptions.app_title,
+                    title:themeoptions.app_title,
                 }} 
             /> 
             <Stack.Screen name="Profile" component={ProfileScreen} 

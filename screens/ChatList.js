@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from 'react'
 import {  View,FlatList,Pressable,RefreshControl } from 'react-native';
-import { Avatar, Card,IconButton } from 'react-native-paper';
+import { Avatar, Card,IconButton, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChatHistory } from '../components/redux/actions/chatActions';
 import Config from '../components/utils/Config';
 import useThemeStyle from '../components/utils/useThemeStyle';
+import filter from 'lodash.filter';
 
 const ChatList = ({ navigation }) => {
 
@@ -12,10 +13,20 @@ const ChatList = ({ navigation }) => {
     const dispatch = useDispatch();
     const chathistory = useSelector((state) => state.chats.chathistory);
     const authData = useSelector((state) => state.auth);
+    const [msgdata, setMsgData] = useState([]);
+
+    // filter Data
+    const [query, setQuery] = useState('');
+    const [fullData, setFullData] = useState([]);
 
     useEffect(() => {
         dispatch(getChatHistory(authData.data.user_id));
-    }, [dispatch])
+        setMsgData(chathistory);
+        setFullData(chathistory);
+        return () =>{
+            
+        }
+    }, [])
         
     
     const [referesing,setReferesing] = useState(false);
@@ -32,13 +43,57 @@ const ChatList = ({ navigation }) => {
         });
     }
 
+     // filter chats
+    const handleSearch = text => {
+        const formattedQuery = text.toLowerCase();
+        const filteredData = filter(fullData, user => {
+          return contains(user, formattedQuery);
+        });
+        setMsgData(filteredData);
+        setQuery(text);
+    };
+
+    const contains = (user, query) => {
+        const { user_name, company, email, phone } = user;
+        
+        if (user_name.toLowerCase().includes(query) ||
+            company.toLowerCase().includes(query) || 
+            email.toLowerCase().includes(query) ||
+            phone.toLowerCase().includes(query)) {
+            return true;
+        }
+        
+        return false;
+    };
+
     const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
 
     return (
         <View style={GlobalStyle.container}>
             <FlatList
+                ListHeaderComponent={
+                    <View
+                        style={{
+                        backgroundColor: '#fff',
+                        paddingHorizontal: 10,
+                        marginBottom:10,
+                        marginTop:-10,
+                        borderRadius: 20
+                        }}
+                    >
+                    <TextInput                        
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        clearButtonMode="always"
+                        value={query}
+                        onChangeText={queryText => handleSearch(queryText)}
+                        placeholder="Search"
+                        style={{ backgroundColor: '#fff'}}
+                        />
+                    </View>
+                }
                 keyExtractor={(item) => item.chat_detail_id}            
-                data={chathistory}
+                data={msgdata}
                 renderItem={({item}) => (
                     <Pressable onPress={() => pressHandler(item)}>
                         <Card.Title              

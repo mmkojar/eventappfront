@@ -23,7 +23,7 @@ const PollView = ({ route }) => {
                  
         return () => {
         } 
-    }, [dispatch])    
+    }, [])    
         
     const handlePollSubmit = (res) => {
       dispatch(updatePolls(res.pid,res.paid,authData.data.user_id));

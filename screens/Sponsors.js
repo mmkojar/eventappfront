@@ -11,12 +11,11 @@ function Sponsors() {
 
     const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
-    const result = useSelector((state) => state.delegate);
-    const { sponsor } = result;
+    const sponsor = useSelector((state) => state.delegate.sponsor);
 
     useEffect(() => {  
         dispatch(getSponsors());
-    }, [dispatch])
+    }, [])
 
     return (
         <View style={GlobalStyle.container}>

@@ -9,12 +9,11 @@ function FAQ() {
     
     const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
-    const result = useSelector((state) => state.delegate);
-    const { faq } = result;
+    const faq = useSelector((state) => state.delegate.faq);    
     
     useEffect(() => {  
         dispatch(getFAQ());
-    }, [dispatch])
+    }, [])
 
 
     const [expanded, setExpanded] = React.useState(true);

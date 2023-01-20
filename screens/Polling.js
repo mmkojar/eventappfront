@@ -17,7 +17,7 @@ const Polling = ({ navigation }) => {
         return () => {
 
         } 
-    }, [dispatch])
+    }, [])
 
     const pressHandler = (id) => {
       navigation.navigate('PollView', {

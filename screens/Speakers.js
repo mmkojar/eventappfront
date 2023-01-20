@@ -11,12 +11,11 @@ function Speakers() {
 
     const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
-    const result = useSelector((state) => state.delegate);
-    const { speaker } = result;
+    const speaker = useSelector((state) => state.delegate.speaker);
 
     useEffect(() => {  
         dispatch(getSpeakers());
-    }, [dispatch])
+    }, [])
 
     return (
         <View style={GlobalStyle.container}>

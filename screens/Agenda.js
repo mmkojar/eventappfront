@@ -8,13 +8,12 @@ import useThemeStyle from '../components/utils/useThemeStyle';
 function Agenda({navigation}) {
 
     const [theme,GlobalStyle] = useThemeStyle();
+    const agenda = useSelector((state) => state.delegate.agenda);
     const dispatch = useDispatch();
-    const result = useSelector((state) => state.delegate);
-    const { agenda } = result;
     
     useEffect(() => {  
         dispatch(getAgenda());
-    }, [dispatch])
+    }, [])
 
     const pressHandler = (item) => {
         navigation.navigate('AgendaDetail', {

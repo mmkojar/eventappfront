@@ -17,12 +17,13 @@ const ChatBox = ({ route, navigation }) => {
     
     const dispatch = useDispatch();
     const authData = useSelector((state) => state.auth);
+    const chatMsgs = useSelector((state) => state.chats.data);
+    const [message,Setmessage] = useState();
 
     useEffect(() => {
-
         fcmService.register(onRegister,onNotification,onOpenNotification)
         localNotificationService.configure(onOpenNotification);
-
+        
         // dispatch({
         //     type: START_LOADER,
         // });
@@ -36,11 +37,8 @@ const ChatBox = ({ route, navigation }) => {
             //     type: STOP_LOADER,
             // });
         }
-    }, [dispatch])
+    }, [])
     
-    const chatMsgs = useSelector((state) => state.chats.data);    
-    const [message,Setmessage] = useState();
-   
     const [referesing,setReferesing] = useState(false);
     const onReferesh = () => {
         setReferesing(true)

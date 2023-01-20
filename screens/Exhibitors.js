@@ -11,12 +11,11 @@ function Exhibitors() {
 
     const [theme,GlobalStyle] = useThemeStyle();
     const dispatch = useDispatch();
-    const result = useSelector((state) => state.delegate);
-    const { exhibitors } = result;
+    const exhibitors = useSelector((state) => state.delegate.exhibitors);
 
     useEffect(() => {  
         dispatch(getExhibitors());
-    }, [dispatch])
+    }, [])
 
     return (
         <View style={GlobalStyle.container}>

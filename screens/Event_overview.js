@@ -8,13 +8,14 @@ import useThemeStyle from '../components/utils/useThemeStyle';
 const Event_overview = () => {
 
     const [theme,GlobalStyle] = useThemeStyle();
-    const dispatch = useDispatch();
+    const aboutevent = useSelector((state) => state.delegate.about);
+
+    const dispatch = useDispatch();    
 
     useEffect(() => {  
         dispatch(getAboutEvent());
-    }, [dispatch])
+    }, [])
     
-    const aboutevent = useSelector((state) => state.delegate.about);
         
     return (
         <View style={GlobalStyle.container}>
