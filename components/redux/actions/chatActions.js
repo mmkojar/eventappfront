@@ -59,7 +59,7 @@ export const getChatHistory = (userid) => (dispatch) => {
         if(res.data && res.data.status === "true") {
             dispatch({
                 type: GET_USER_CHATS,
-                payload: res.data.data,
+                payload: res.data,
             });
         }
         else {

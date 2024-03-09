@@ -57,7 +57,7 @@ function Profile() {
         ],{cancelable:true})
     }
 
-    const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
+    const du_image = (themeoptions && themeoptions.du_image.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image.name)} : require('../assets/user.png');
     
     return (
        

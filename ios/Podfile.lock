@@ -65,9 +65,9 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Permission-Camera (3.6.1):
+  - Permission-Camera (3.10.1):
     - RNPermissions
-  - Permission-Notifications (3.6.1):
+  - Permission-Notifications (3.10.1):
     - RNPermissions
   - PromisesObjC (2.1.1)
   - RCT-Folly (2021.06.28.00-v2):
@@ -276,6 +276,8 @@ PODS:
     - React-Core
   - react-native-camera/RN (4.2.1):
     - React-Core
+  - react-native-pager-view (6.2.3):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
   - react-native-splash-screen (3.3.0):
@@ -362,7 +364,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (2.1.0):
     - React-Core
-  - RNPermissions (3.6.1):
+  - RNPermissions (3.10.1):
     - React-Core
   - RNScreens (3.18.2):
     - React-Core
@@ -394,6 +396,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-camera (from `../node_modules/react-native-camera`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-webview (from `../node_modules/react-native-webview`)
@@ -474,6 +477,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-camera:
     :path: "../node_modules/react-native-camera"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -540,8 +545,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Permission-Camera: 4c0b610b46391c85d2d50f1446d98b4103b14b5a
-  Permission-Notifications: 49cae9775ac1e37c0e6cc28adca1d703527f1875
+  Permission-Camera: 9b70902f34a83c10e198d2d01f0e453e58842776
+  Permission-Notifications: 817390e18898f34adad940cd4141e771e77086ea
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 4bf86c70714490bca4bf2696148638284622644b
@@ -555,10 +560,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 94ce921e1d8ce7023366873ec371f3441383b396
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
-  react-native-camera: 210a872c84d3aa0982a9223047ef9e743ed694fa
-  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
+  react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
+  react-native-pager-view: c29d484f19c49ff19525a94105e4ab2c4d4ae273
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-webview: a192040320142d8f10d652a745c46e4f43e37f8c
+  react-native-webview: d33e2db8925d090871ffeb232dfa50cb3a727581
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
@@ -571,17 +577,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  RNCAsyncStorage: 19af8f3e136504e0450e7f85cfb46fc38da87ec9
-  RNCMaskedView: d367b2a8df3992114e31b32b091a0c00dc800827
-  RNCPushNotificationIOS: 089da3b657e1e3d464f38195fd2e3069608ef5af
+  RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
+  RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
+  RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNFBApp: 8e8fa6d34c75c17b8497f4ceb4b6fec43bdd1f1c
   RNFBMessaging: e36dd4e6ce0858d256055d062ad16eca54bb3118
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
-  RNPermissions: 79d0c889562fd792329821bea3155fe6eb54d359
+  RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 
-PODFILE CHECKSUM: 90fd7f2250d00d8f0f93606f18d1662f99f56432
+PODFILE CHECKSUM: 550e54f43cafcfde0380c2803634f7833a6ce497
 
 COCOAPODS: 1.11.3

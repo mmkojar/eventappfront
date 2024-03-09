@@ -12,6 +12,7 @@ const ChatList = ({ navigation }) => {
     const [theme,GlobalStyle,themeoptions] = useThemeStyle();
     const dispatch = useDispatch();
     const chathistory = useSelector((state) => state.chats.chathistory);
+    
     const authData = useSelector((state) => state.auth);
     const [msgdata, setMsgData] = useState([]);
 
@@ -21,8 +22,12 @@ const ChatList = ({ navigation }) => {
 
     useEffect(() => {
         dispatch(getChatHistory(authData.data.user_id));
-        setMsgData(chathistory);
-        setFullData(chathistory);
+        if(authData.data.group=="admin") {
+            setMsgData(chathistory.data);
+        } else {
+            setMsgData(chathistory.admin);
+        }
+        setFullData(chathistory.data);
         return () =>{
             
         }
@@ -66,7 +71,7 @@ const ChatList = ({ navigation }) => {
         return false;
     };
 
-    const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
+    const du_image = (themeoptions && themeoptions.du_image.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image.name)} : require('../assets/user.png');
 
     return (
         <View style={GlobalStyle.container}>
@@ -81,15 +86,19 @@ const ChatList = ({ navigation }) => {
                         borderRadius: 20
                         }}
                     >
-                    <TextInput                        
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        clearButtonMode="always"
-                        value={query}
-                        onChangeText={queryText => handleSearch(queryText)}
-                        placeholder="Search"
-                        style={{ backgroundColor: '#fff'}}
-                        />
+                        {
+                            authData.data.group=="admin"?
+                            <TextInput                        
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                clearButtonMode="always"
+                                value={query}
+                                onChangeText={queryText => handleSearch(queryText)}
+                                placeholder="Search"
+                                style={{ backgroundColor: '#fff'}}
+                            />:null
+                        }
+                    
                     </View>
                 }
                 keyExtractor={(item) => item.chat_detail_id}            

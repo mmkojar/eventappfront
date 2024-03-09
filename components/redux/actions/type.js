@@ -12,6 +12,7 @@ export const GET_FAQ = 'GET_FAQ';
 export const GET_AGENDA = 'GET_AGENDA';
 export const GET_SPEAKERS = 'GET_SPEAKERS';
 export const GET_SPONSORS = 'GET_SPONSORS';
+export const GET_EVENT_FEED = 'GET_EVENT_FEED';
 export const GET_EXHIBITORS = 'GET_EXHIBITORS';
 export const GET_DELEGATES = 'GET_DELEGATES';
 export const GET_CHATS = 'GET_CHATS';

@@ -29,7 +29,7 @@ function Sponsors() {
                             <Image source={{uri: Config.imgurl+item.image}} style={GlobalStyle.avatar}/>                       
                             <Card.Content style={GlobalStyle.carContent}>
                                 <Paragraph style={[GlobalStyle.layoutPara,{fontSize:18,marginTop:6}]}>{item.name}</Paragraph>
-                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.link)}><Text style={{color:GlobalStyle.primarycolor.color}} >{item.link}</Text></Caption>
+                                {/* <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.link)}><Text style={{color:GlobalStyle.primarycolor.color}} >{item.link}</Text></Caption> */}
                             </Card.Content>
                         </Card>
                     </Fragment>

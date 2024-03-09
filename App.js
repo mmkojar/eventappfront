@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
+import { Platform } from 'react-native';
 import { Provider as PaperProvider, withTheme } from 'react-native-paper';
 import Nav from './components/Nav';
 import Spinner from './components/utils/Spinner';
 import { navigationRef, navigate } from './services/RootNavigation';
+import messaging from '@react-native-firebase/messaging';
 import { localNotificationService } from './services/LocalNotificationService';
 import { fcmService } from './services/FCMService';
 import { checkToken } from './components/redux/actions/authActions';
@@ -18,11 +20,23 @@ const App = () => {
 
   useEffect(() => {
     fcmService.registerAppWithFCM();
-    fcmService.register(onRegister,onNotification,onOpenNotification)
+    fcmService.register(onRegister,onOpenNotification)
     localNotificationService.createChannel()
     localNotificationService.configure(onOpenNotification);
-    console.log(localNotificationService.getAllChannels());
+    // console.log(localNotificationService.getAllChannels());
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      if (remoteMessage) {
+        if (Platform.OS === 'ios') {
+          onNotification(remoteMessage.notification);
+        } else {
+          onNotification(remoteMessage.data);
+        }
+      }
+    });
     SplashScreen.hide();
+    return () => {
+      unsubscribe();
+    };
   },[])   
 
   const onRegister = (res) => {

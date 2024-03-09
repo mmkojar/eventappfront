@@ -4,9 +4,9 @@ import { localNotificationService } from './LocalNotificationService';
 
 
 class FCMService {
-    register  (onRegister, onNotification, onOpenNotification) {
+    register  (onRegister, onOpenNotification) {
         this.checkPermission(onRegister);
-        this.createNotificationListeners(onRegister, onNotification, onOpenNotification);
+        this.createNotificationListeners(onRegister, onOpenNotification);
     }
 
     registerAppWithFCM = async () => {
@@ -61,10 +61,10 @@ class FCMService {
             })
     }
 
-    createNotificationListeners = (onRegister, onNotification, onOpenNotification) => {
+    createNotificationListeners = (onRegister, onOpenNotification) => {
         
         //Forground state message
-        this.messageListener = messaging().onMessage(async remoteMessage => {
+       /*  this.messageListener = messaging().onMessage(async remoteMessage => {
             localNotificationService.cancelAllLocalNotifications();
             if (remoteMessage) {
                 console.log("[FCMService] A new FCm message arrived", remoteMessage);
@@ -76,7 +76,7 @@ class FCMService {
                 }
                 onNotification(notification);
             }
-        });
+        }); */
 
         messaging().setBackgroundMessageHandler(async remoteMessage => {
             localNotificationService.cancelAllLocalNotifications();

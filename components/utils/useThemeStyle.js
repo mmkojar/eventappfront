@@ -13,7 +13,7 @@ const useThemeStyle = () => {
     useEffect(() => {  
         const settingInterval = setInterval(() => {            
             dispatch(getSettings());
-        }, 2000);
+        }, 1500);
 
         return () => {
             clearInterval(settingInterval);
@@ -42,7 +42,7 @@ const useThemeStyle = () => {
         roundness: 2,
         colors: {
             ...DefaultTheme.colors,
-            primary: themeoptions.color,
+            primary: themeoptions.color.name,
             accent: '#e6e7e8',
         },
         fonts: configureFonts(fontConfig),

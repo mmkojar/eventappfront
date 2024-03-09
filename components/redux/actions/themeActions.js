@@ -15,7 +15,7 @@ export const getSettings = () => (dispatch) => {
     // dispatch({
     //     type: START_LOADER,
     // });
-    axios.get(api_url+'settings/', config)
+    axios.get(api_url+'settings', config)
     .then((res) => {
         // console.log(res.data.data);
         if(res.data && res.data.status === "true") {
@@ -26,7 +26,7 @@ export const getSettings = () => (dispatch) => {
         }
         else {
             dispatch({
-                type: action,
+                type: THEME_SETTINGS,
                 payload: [],
             });  
         }

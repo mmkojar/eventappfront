@@ -15,7 +15,7 @@ function Home({ navigation }) {
                 <View>
                     <Image
                         style={{height:40,width:40,marginLeft:8}}                        
-                        source={(themeoptions && themeoptions.hp_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.hp_logo)} : require('../assets/homelogo.png')}
+                        source={(themeoptions && themeoptions.hp_logo.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.hp_logo.name)} : require('../assets/homelogo.png')}
                     >
                     </Image>
                 </View>
@@ -39,139 +39,170 @@ function Home({ navigation }) {
 
     return (
         <ScrollView>
+            <Image
+                style={{height:120,width:310,alignSelf:'center'}}
+                source={require('../assets/app_banner.png')}
+            />  
             <View style={styles.container}>
-                    <Pressable onPress={() => navigation.navigate('EventOverview')}>
-                        <Card style={styles.innerItem}elevation={3}>
+                    {
+                        themeoptions && themeoptions.about.status == '1'?
+                            <Pressable onPress={() => navigation.navigate('EventOverview')}>
+                            <Card style={styles.innerItem}elevation={3}>
+                                    <Image
+                                        style={styles.image}
+                                        source={(themeoptions && themeoptions.about_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.about_file.name)} : require('../assets/Icons/1.png')}
+                                    >
+                                    </Image>
+                                    <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.about.name !== null) ? themeoptions.about.name : 'Event OverView'}</Text>
+                            </Card>
+                        </Pressable>:null
+                    }
+                    {
+                        themeoptions && themeoptions.agenda.status == '1'?                     
+                        <Pressable onPress={() => navigation.navigate('Agenda')}> 
+                            <Card style={styles.innerItem}elevation={3}>
                                 <Image
                                     style={styles.image}
-                                    source={(themeoptions && themeoptions.about_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.about_file)} : require('../assets/Icons/1.png')}
+                                    // source={require('../assets/Icons/2.png')}
+                                    source={(themeoptions && themeoptions.agenda_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.agenda_file.name)} : require('../assets/Icons/2.png')}
                                 >
                                 </Image>
-                                <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.about !== null) ? themeoptions.about : 'Event OverView'}</Text>
-                        </Card>
-                    </Pressable>                      
-                    <Pressable onPress={() => navigation.navigate('Agenda')}> 
-                        <Card style={styles.innerItem}elevation={3}>
-                            <Image
-                                style={styles.image}
-                                // source={require('../assets/Icons/2.png')}
-                                source={(themeoptions && themeoptions.agenda_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.agenda_file)} : require('../assets/Icons/2.png')}
-                            >
-                            </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.agenda !== null) ? themeoptions.agenda : 'Agenda'}</Text>
-                        </Card>
-                    </Pressable>       
-                    <Pressable onPress={() => navigation.navigate('Delegates')}>
+                                <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.agenda.name !== null) ? themeoptions.agenda.name : 'Agenda'}</Text>
+                            </Card>
+                        </Pressable>:null
+                    }     
+                    {themeoptions && themeoptions.delg.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Delegates')}>
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.delg_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.delg_file)} : require('../assets/Icons/4.png')}
+                                source={(themeoptions && themeoptions.delg_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.delg_file.name)} : require('../assets/Icons/4.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.delg != null) ? themeoptions.delg : 'Delegates'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.delg.name != null) ? themeoptions.delg.name : 'Delegates'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('ChatList')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.chat.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('ChatList')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.chat_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.chat_file)} : require('../assets/Icons/6.png')}
+                                source={(themeoptions && themeoptions.chat_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.chat_file.name)} : require('../assets/Icons/6.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.chat != null) ? themeoptions.chat : 'Chat'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.chat.name != null) ? themeoptions.chat.name : 'Chat'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Notification')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.notify.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Notification')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.notify_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.notify_file)} : require('../assets/Icons/8.png')}
+                                source={(themeoptions && themeoptions.notify_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.notify_file.name)} : require('../assets/Icons/8.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.notify != null) ? themeoptions.notify : 'Notification'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.notify.name != null) ? themeoptions.notify.name : 'Notification'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Polling')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.polls.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Polling')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.polls_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.polls_file)} : require('../assets/Icons/15.png')}
+                                source={(themeoptions && themeoptions.polls_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.polls_file.name)} : require('../assets/Icons/15.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.polls != null) ? themeoptions.polls : 'Polling'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.polls.name != null) ? themeoptions.polls.name : 'Polling'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('QRScan')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.qr.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('QRScan')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.qr_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.qr_file)} : require('../assets/Icons/13.png')}
+                                source={(themeoptions && themeoptions.qr_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.qr_file.name)} : require('../assets/Icons/13.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.qr != null) ? themeoptions.qr : 'QRScan'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.qr.name != null) ? themeoptions.qr.name : 'QRScan'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Speakers')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.speaker.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Speakers')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.speaker_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.speaker_file)} : require('../assets/Icons/3.png')}
+                                source={(themeoptions && themeoptions.speaker_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.speaker_file.name)} : require('../assets/Icons/3.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.speaker != null) ? themeoptions.speaker : 'Speakers'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.speaker.name != null) ? themeoptions.speaker.name : 'Speakers'}</Text>
                         </Card>
-                    </Pressable>                     
-                    <Pressable onPress={() => navigation.navigate('Sponsors')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.sponsors.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Artist')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.sponsors_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.sponsors_file)} : require('../assets/Icons/5.png')}
+                                source={(themeoptions && themeoptions.sponsors_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.sponsors_file.name)} : require('../assets/Icons/5.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.sponsors != null) ? themeoptions.sponsors : 'Sponsors'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.sponsors.name != null) ? themeoptions.sponsors.name : 'Sponsors'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Exhibitors')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.exhi.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Exhibitors')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.exhi_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.exhi_file)} : require('../assets/Icons/12.png')}
+                                source={(themeoptions && themeoptions.exhi_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.exhi_file.name)} : require('../assets/Icons/12.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.exhi != null) ? themeoptions.exhi : 'Exhibitors'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.exhi.name != null) ? themeoptions.exhi.name : 'Exhibitors'}</Text>
                         </Card>
-                    </Pressable>
-                    {/* <Pressable onPress={() => navigation.navigate('Gallery')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.faq.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('FAQ')}>
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.about_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.about_file)} : require('../assets/Icons/2.png')}
+                                source={(themeoptions && themeoptions.faq_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.faq_file.name)} : require('../assets/Icons/9.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.about != null) ? themeoptions.about : 'Gallery'}</Text>
+                        <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.faq.name != null) ? themeoptions.faq.name : 'FAQ'}</Text>
                         </Card>
-                    </Pressable> */}
-                    
-                    <Pressable onPress={() => navigation.navigate('FAQ')}>
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.support.status == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Support')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
                                 style={styles.image}                                
-                                source={(themeoptions && themeoptions.faq_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.faq_file)} : require('../assets/Icons/9.png')}
+                                source={(themeoptions && themeoptions.support_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.support_file.name)} : require('../assets/Icons/14.png')}
                             >
                             </Image>
-                        <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.faq != null) ? themeoptions.faq : 'FAQ'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.support.name != null) ? themeoptions.support.name : 'Support'}</Text>
                         </Card>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Support')}> 
+                    </Pressable>:null
+                    }
+                    {themeoptions && themeoptions.event_feed.status == '1'? 
+                    <Pressable onPress={() => navigation.navigate('EventFeed')}> 
                         <Card style={styles.innerItem} elevation={3}>
                             <Image
-                                style={styles.image}                                
-                                source={(themeoptions && themeoptions.support_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.support_file)} : require('../assets/Icons/14.png')}
+                                style={styles.image}                 
+                                source={(themeoptions && themeoptions.event_feed_file.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.event_feed_file.name)} : require('../assets/Icons/1.png')}
                             >
                             </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.support != null) ? themeoptions.support : 'Support'}</Text>
+                            <Text style={GlobalStyle.homeIconText}>Event Feed</Text>
                         </Card>
-                    </Pressable>
+                    </Pressable>:null
+                    }
                     
             </View>
         </ScrollView>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { 
     START_LOADER, STOP_LOADER, GET_AGENDA,  GET_ABOUT_EVENT, 
-    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ
+    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ, GET_EVENT_FEED
 } from './type';
 import Config from '../../utils/Config';
 
@@ -41,6 +41,12 @@ export const getExhibitors = () => (dispatch) => {
 export const getSponsors = () => (dispatch) => {
 
     fetchAxios(dispatch,'sponsors',GET_SPONSORS);
+}
+
+// ------Event Feed------
+export const getEventFeed = () => (dispatch) => {
+
+    fetchAxios(dispatch,'event_feed',GET_EVENT_FEED);
 }
 
 // ------Agenda------

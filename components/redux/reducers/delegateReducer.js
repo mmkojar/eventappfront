@@ -1,12 +1,13 @@
 import { 
     GET_ABOUT_EVENT, GET_SPEAKERS, GET_AGENDA, GET_DELEGATES, 
-    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ 
+    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ, GET_EVENT_FEED 
 } from '../actions/type';
 
 const initialState = {
     about:null,
     speaker:null,
     sponsor:null,
+    event_feed:null,
     exhibitors:null,
     agenda:null,
     faq:null,
@@ -38,6 +39,11 @@ export default function (state = initialState, action) {
                 ...state,                
                 sponsor:action.payload,
             };
+        case GET_EVENT_FEED:
+            return {
+                ...state,                
+                event_feed:action.payload,
+            };    
         case GET_AGENDA:
             return {
                 ...state,                

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>EventApp</string>
+	<string>AOP Meet</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>EventApp wants your camera permission for QR Scanner</string>
+	<string>AOP Meet wants your camera permission for QR Scanner</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>VarelaRound-Regular.ttf</string>

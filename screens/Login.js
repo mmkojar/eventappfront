@@ -46,8 +46,8 @@ function Login() {
                     {/* <ImageBackground source={require('../assets/login_screen.png')} resizeMode="cover" style={{flex: 1,justifyContent:'flex-end'}}>*/}
                         <Card style={styles.card}>
                             <Image
-                                style={{height:120,width:120,alignSelf:'center'}}
-                                source={(themeoptions && themeoptions.lc_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo)} : require('../assets/logo.png')}
+                                style={{height:120,width:300,alignSelf:'center'}}
+                                source={(themeoptions && themeoptions.lc_logo.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo.name)} : require('../assets/logo.png')}
                             />   
                             {/* <Text style={styles.heading}>Login To Continue !</Text> */}
                             <Card.Content>

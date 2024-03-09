@@ -17,12 +17,13 @@ import AgendaDetailScreen from '../screens/AgendaDetail';
 import SpeakersScreen from '../screens/Speakers';
 import SponsorsScreen from '../screens/Sponsors';
 import ExhibitorsScreen from '../screens/Exhibitors';
-import GalleryScreen from '../screens/Gallery';
+import EventFeedScreen from '../screens/EventFeed';
 import FAQScreen from '../screens/FAQ';
 import SupportScreen from '../screens/Support';
 import PollsScreen from '../screens/Polling';
 import PollViewScreen from '../screens/PollView';
 import ScanQR from '../screens/ScanQR';
+import FacebookScreen from '../screens/Facebook';
 import useThemeStyle from './utils/useThemeStyle';
 
 const Stack = createStackNavigator();
@@ -44,7 +45,7 @@ const Nav = ({color, refer}) => {
                 headerStyle: {
                     backgroundColor: color,
                 },
-                headerTintColor:themeoptions.title_color,
+                headerTintColor:themeoptions.title_color.name,
                 headerTitleAlign:'center',
                 headerTitleStyle: {
                     fontFamily:'VarelaRound-Regular'
@@ -56,7 +57,7 @@ const Nav = ({color, refer}) => {
             >
             <Stack.Screen name="Home" component={HomeScreen}
                 options={{
-                    title:themeoptions.app_title,
+                    title:themeoptions.app_title.name,
                 }} 
             /> 
             <Stack.Screen name="Profile" component={ProfileScreen} 
@@ -83,9 +84,9 @@ const Nav = ({color, refer}) => {
                     title:'Agenda Detail',                   
                 }}/>
             <Stack.Screen name="Speakers" component={SpeakersScreen} />
-            <Stack.Screen name="Sponsors" component={SponsorsScreen} />
+            <Stack.Screen name="Artist" component={SponsorsScreen} />
             <Stack.Screen name="Exhibitors" component={ExhibitorsScreen} />
-            <Stack.Screen name="Gallery" component={GalleryScreen} />
+            <Stack.Screen name="EventFeed" component={EventFeedScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
             {/* <Stack.Screen name="Notes" component={NotesScreen} /> */}
             <Stack.Screen name="FAQ" component={FAQScreen} />
@@ -95,7 +96,8 @@ const Nav = ({color, refer}) => {
             <Stack.Screen name="QRScan" component={ScanQR} 
             options={{
                 title:'QR Scan',                   
-               }}/>
+            }}/>
+            <Stack.Screen name="Facebook" component={FacebookScreen} />
             </Stack.Navigator>
             )
             :
