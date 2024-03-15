@@ -1,5 +1,5 @@
 import axios from "axios";
-import { THEME_SETTINGS, START_LOADER ,STOP_LOADER } from "./type";
+import { THEME_SETTINGS, DISPLAY_SETTING } from "./type";
 import Config from "../../utils/Config";
 
 const api_url = Config.api_url;
@@ -12,9 +12,6 @@ const config = {
 
 export const getSettings = () => (dispatch) => {
 
-    // dispatch({
-    //     type: START_LOADER,
-    // });
     axios.get(api_url+'settings', config)
     .then((res) => {
         // console.log(res.data.data);
@@ -23,6 +20,10 @@ export const getSettings = () => (dispatch) => {
                 type: THEME_SETTINGS,
                 payload: res.data.data,
             });
+            dispatch({
+                type: DISPLAY_SETTING,
+                payload: res.data.visible,
+            });
         }
         else {
             dispatch({
@@ -30,14 +31,8 @@ export const getSettings = () => (dispatch) => {
                 payload: [],
             });  
         }
-        dispatch({
-            type: STOP_LOADER,
-        });
     })
-    .catch((err) => {        
-        dispatch({
-            type: STOP_LOADER,
-        });
+    .catch((err) => {    
         alert(err);
     });
 }

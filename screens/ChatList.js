@@ -12,7 +12,8 @@ const ChatList = ({ navigation }) => {
     const [theme,GlobalStyle,themeoptions] = useThemeStyle();
     const dispatch = useDispatch();
     const chathistory = useSelector((state) => state.chats.chathistory);
-    
+    const admins = useSelector((state) => state.chats.admins);
+
     const authData = useSelector((state) => state.auth);
     const [msgdata, setMsgData] = useState([]);
 
@@ -21,15 +22,19 @@ const ChatList = ({ navigation }) => {
     const [fullData, setFullData] = useState([]);
 
     useEffect(() => {
+
+        const chatInterval = setInterval(() => {            
         dispatch(getChatHistory(authData.data.user_id));
+        }, 1000)
+        console.log(chathistory);
         if(authData.data.group=="admin") {
-            setMsgData(chathistory.data);
+            setMsgData(chathistory);
+            setFullData(chathistory);
         } else {
-            setMsgData(chathistory.admin);
+            setMsgData(admins);
         }
-        setFullData(chathistory.data);
         return () =>{
-            
+            clearInterval(chatInterval);
         }
     }, [])
         
@@ -71,7 +76,7 @@ const ChatList = ({ navigation }) => {
         return false;
     };
 
-    const du_image = (themeoptions && themeoptions.du_image.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image.name)} : require('../assets/user.png');
+    const du_image = (themeoptions && themeoptions.du_image !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.du_image)} : require('../assets/user.png');
 
     return (
         <View style={GlobalStyle.container}>

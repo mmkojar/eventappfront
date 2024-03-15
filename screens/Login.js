@@ -47,16 +47,17 @@ function Login() {
                         <Card style={styles.card}>
                             <Image
                                 style={{height:120,width:300,alignSelf:'center'}}
-                                source={(themeoptions && themeoptions.lc_logo.name !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo.name)} : require('../assets/logo.png')}
+                                source={(themeoptions && themeoptions.lc_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo)} : require('../assets/logo.png')}
                             />   
                             {/* <Text style={styles.heading}>Login To Continue !</Text> */}
                             <Card.Content>
                                 <TextInput
                                     style={[GlobalStyle.textinput,{marginVertical:30,borderWidth:1}]}
                                     onChangeText={(val) => SetIdentity(val)}
-                                    placeholder="Enter Email"
+                                    placeholder="Enter Employee Id"
                                     placeholderTextColor={GlobalStyle.primarycolor.color}
-                                    keyboardType='email-address'
+                                    keyboardType='number-pad'
+                                    maxLength={6}
                                     value={identity}
                                 />
                             </Card.Content>

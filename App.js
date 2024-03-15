@@ -7,12 +7,12 @@ import { navigationRef, navigate } from './services/RootNavigation';
 import messaging from '@react-native-firebase/messaging';
 import { localNotificationService } from './services/LocalNotificationService';
 import { fcmService } from './services/FCMService';
-import { checkToken } from './components/redux/actions/authActions';
+// import { checkToken } from './components/redux/actions/authActions';
 import SplashScreen from 'react-native-splash-screen'
-import factory from './components/redux/store';
 import useThemeStyle from './components/utils/useThemeStyle';
+// import factory from './components/redux/store';
 
-const { store } = factory();
+// const { store } = factory();
 
 const App = () => {
  
@@ -40,7 +40,7 @@ const App = () => {
   },[])   
 
   const onRegister = (res) => {
-    store.dispatch(checkToken(res));
+    // store.dispatch(checkToken(res));
   }
 
   const onNotification = (notify) => {

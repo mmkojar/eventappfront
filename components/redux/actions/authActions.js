@@ -135,23 +135,24 @@ export const profileAction = (id,first_name,last_name,phone,email,city) => (disp
 };
 
 export const checkToken = (token) => (dispatch) => {
-    dispatch({
+    /* dispatch({
         type: START_LOADER,
-    });
+    }); */
     axios.get(api_url+`user/checktoken/${token}`, config)
     .then((res) => {     
         // console.log(res.data);
         if(res && res.data.status == 'false') {
+          alert('Employee Id already using on another device!'); 
           dispatch(logoutAction());
         }
-        dispatch({
+       /*  dispatch({
             type: STOP_LOADER,
-        });
+        }); */
     })
     .catch((err) => {
-        dispatch({
+       /*  dispatch({
             type: STOP_LOADER,
-        });
+        }); */
         alert(err);
     });
   }

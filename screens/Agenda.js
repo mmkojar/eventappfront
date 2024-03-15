@@ -1,11 +1,41 @@
 import React, { useEffect } from 'react'
 import { View, FlatList, Pressable, StyleSheet, useWindowDimensions, ScrollView, Platform } from 'react-native';
-import { Card, IconButton, Text } from 'react-native-paper';
+// import { Card, IconButton, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAgenda } from '../components/redux/actions/delegateActions';
 import useThemeStyle from '../components/utils/useThemeStyle';
 import { TabView,TabBar, SceneMap } from 'react-native-tab-view';
 import { Table, Row, Rows } from 'react-native-table-component';
+
+
+const tabPages = (tableHead,widthArr,tableData) => {
+    return (
+        <View style={{ flex: 1, backgroundColor: '#fff' }} >
+            <ScrollView horizontal={true}>
+                <View>
+                    <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
+                        <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',color:'#000',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
+                    </Table>
+                    <ScrollView style={{ marginTop: -1 }}>
+                        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
+                            {
+                                tableData.map((rowData, index) => (
+                                    <Row
+                                        key={index}
+                                        data={rowData}
+                                        widthArr={widthArr}
+                                        style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
+                                        textStyle={{ textAlign: 'center',color:'#000',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
+                                    />
+                                ))
+                            }
+                        </Table>
+                    </ScrollView>
+                </View>
+            </ScrollView>
+        </View>
+    )
+}
 
 const Agenda = ({ navigation }) => {
 
@@ -47,111 +77,43 @@ const Agenda = ({ navigation }) => {
     }, [])
     const widthArr = [100, 140, 240]
     const FirstRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} >
-            <ScrollView horizontal={true}>
-                <View>
-                    <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                        <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
-                    </Table>
-                    <ScrollView style={{ marginTop: -1 }}>
-                        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                            {
-                                tableData.map((rowData, index) => (
-                                    <Row
-                                        key={index}
-                                        data={rowData}
-                                        widthArr={widthArr}
-                                        style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
-                                        textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
-                                    />
-                                ))
-                            }
-                        </Table>
-                    </ScrollView>
-                </View>
-            </ScrollView>
-        </View>
+        tabPages(tableHead,widthArr,tableData)
+        // <View style={{ flex: 1, backgroundColor: '#fff' }} >
+        //     <ScrollView horizontal={true}>
+        //         <View>
+        //             <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
+        //                 <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
+        //             </Table>
+        //             <ScrollView style={{ marginTop: -1 }}>
+        //                 <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
+        //                     {
+        //                         tableData.map((rowData, index) => (
+        //                             <Row
+        //                                 key={index}
+        //                                 data={rowData}
+        //                                 widthArr={widthArr}
+        //                                 style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
+        //                                 textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
+        //                             />
+        //                         ))
+        //                     }
+        //                 </Table>
+        //             </ScrollView>
+        //         </View>
+        //     </ScrollView>
+        // </View>
     );
 
     const SecondRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} >
-            <ScrollView horizontal={true}>
-                <View>
-                    <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                        <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
-                    </Table>
-                    <ScrollView style={{ marginTop: -1 }}>
-                        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                            {
-                                tableData1.map((rowData, index) => (
-                                    <Row
-                                        key={index}
-                                        data={rowData}
-                                        widthArr={widthArr}
-                                        style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
-                                        textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
-                                    />
-                                ))
-                            }
-                        </Table>
-                    </ScrollView>
-                </View>
-            </ScrollView>
-        </View>
+        tabPages(tableHead,widthArr,tableData1)
     );
 
     const ThirdRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} >
-            <ScrollView horizontal={true}>
-                <View>
-                    <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                        <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
-                    </Table>
-                    <ScrollView style={{ marginTop: -1 }}>
-                        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                            {
-                                tableData2.map((rowData, index) => (
-                                    <Row
-                                        key={index}
-                                        data={rowData}
-                                        widthArr={widthArr}
-                                        style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
-                                        textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
-                                    />
-                                ))
-                            }
-                        </Table>
-                    </ScrollView>
-                </View>
-            </ScrollView>
-        </View>
+        tabPages(tableHead,widthArr,tableData2)
     );
 
     const FourthRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} >
-            <ScrollView horizontal={true}>
-                <View>
-                    <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                        <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
-                    </Table>
-                    <ScrollView style={{ marginTop: -1 }}>
-                        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-                            {
-                                tableData3.map((rowData, index) => (
-                                    <Row
-                                        key={index}
-                                        data={rowData}
-                                        widthArr={widthArr}
-                                        style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
-                                        textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
-                                    />
-                                ))
-                            }
-                        </Table>
-                    </ScrollView>
-                </View>
-            </ScrollView>
-        </View>
+        tabPages(tableHead,widthArr,tableData3)
     );
 
     const [index, setIndex] = React.useState(0);

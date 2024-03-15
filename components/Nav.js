@@ -28,7 +28,7 @@ import useThemeStyle from './utils/useThemeStyle';
 
 const Stack = createStackNavigator();
 
-const Nav = ({color, refer}) => {
+const Nav = ({refer}) => {
      
   const [theme,GlobalStyle, themeoptions] = useThemeStyle();
 
@@ -43,9 +43,9 @@ const Nav = ({color, refer}) => {
                 screenOptions={({route}) => ({
                 animationEnabled:false,
                 headerStyle: {
-                    backgroundColor: color,
+                    backgroundColor: theme.colors.primary,
                 },
-                headerTintColor:themeoptions.title_color.name,
+                headerTintColor:themeoptions.title_color,
                 headerTitleAlign:'center',
                 headerTitleStyle: {
                     fontFamily:'VarelaRound-Regular'
@@ -57,7 +57,7 @@ const Nav = ({color, refer}) => {
             >
             <Stack.Screen name="Home" component={HomeScreen}
                 options={{
-                    title:themeoptions.app_title.name,
+                    title:themeoptions.app_title,
                 }} 
             /> 
             <Stack.Screen name="Profile" component={ProfileScreen} 

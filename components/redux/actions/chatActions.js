@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { 
-    START_LOADER, STOP_LOADER, GET_CHATS, GET_USER_CHATS, ADD_CHATS, ERROR
+    START_LOADER, STOP_LOADER, GET_CHATS, GET_USER_CHATS, ADD_CHATS, ERROR, GET_ADMIN_CHATS
 } from './type';
 import Config from '../../utils/Config';
 
@@ -34,14 +34,14 @@ export const getAllChats = (userid,receiver_id) => (dispatch) => {
                 payload: [],
             });
         }       
-        dispatch({
+        /* dispatch({
             type: STOP_LOADER,
-        });    
+        }); */    
     })
     .catch((err) => {
-        dispatch({
+        /* dispatch({
             type: STOP_LOADER,
-        });
+        }); */
         alert(err);
     });    
 }
@@ -49,9 +49,9 @@ export const getAllChats = (userid,receiver_id) => (dispatch) => {
 // ------Get Chats History------
 export const getChatHistory = (userid) => (dispatch) => {
 
-    dispatch({
-        type: START_LOADER,
-    }); 
+    // dispatch({
+    //     type: START_LOADER,
+    // }); 
     const formdata = JSON.stringify({"user_id":userid})
     
     axios.post(api_url+'chat/chat_history', formdata ,config)
@@ -59,7 +59,7 @@ export const getChatHistory = (userid) => (dispatch) => {
         if(res.data && res.data.status === "true") {
             dispatch({
                 type: GET_USER_CHATS,
-                payload: res.data,
+                payload: res.data.data,
             });
         }
         else {
@@ -67,15 +67,19 @@ export const getChatHistory = (userid) => (dispatch) => {
                 type: GET_USER_CHATS,
                 payload: [],
             });
-        }       
+        }
         dispatch({
+            type: GET_ADMIN_CHATS,
+            payload: res.data.admin,
+        });
+        /* dispatch({
             type: STOP_LOADER,
-        });    
+        });  */   
     })
     .catch((err) => {
-        dispatch({
+        /* dispatch({
             type: STOP_LOADER,
-        });
+        }); */
         alert(err);
     });    
 }
@@ -102,14 +106,14 @@ export const sendMessage = (user_id,receiver_id,message) => (dispatch) => {
                 payload: [],
             });
         }
-        dispatch({
+        /* dispatch({
             type: STOP_LOADER,
-        });
+        }); */
     })
     .catch((err) => {
-        dispatch({
+        /* dispatch({
             type: STOP_LOADER,
-        });
+        }); */
         alert(err);
     });    
 }

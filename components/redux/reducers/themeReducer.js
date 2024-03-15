@@ -1,7 +1,8 @@
-import { THEME_SETTINGS } from "../actions/type";
+import { DISPLAY_SETTING, THEME_SETTINGS } from "../actions/type";
 
 const initialState = {
-    settings:[]
+    settings:[],
+    display:[]
 }
 
 export default function (state= initialState, action) {
@@ -11,6 +12,11 @@ export default function (state= initialState, action) {
                 ...state,
                 settings:action.payload
             }
+        case DISPLAY_SETTING:
+            return {
+                ...state,
+                display:action.payload
+            }    
         default:
             return state
     }
