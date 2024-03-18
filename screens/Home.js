@@ -60,7 +60,7 @@ function Home({ navigation }) {
         <ScrollView>
             <Image
                 style={{height:120,width:310,alignSelf:'center'}}
-                source={require('../assets/app_banner.png')}
+                source={(themeoptions && themeoptions.lc_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo)} : require('../assets/app_banner.png')}
             />  
             <View style={styles.container}>
                     {
@@ -75,6 +75,18 @@ function Home({ navigation }) {
                                     <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.about !== null) ? themeoptions.about : 'Event OverView'}</Text>
                             </Card>
                         </Pressable>:null
+                    }
+                    {displaysetting && displaysetting.event_feed == '1'? 
+                    <Pressable onPress={() => navigation.navigate('EventFeed')}> 
+                        <Card style={styles.innerItem} elevation={3}>
+                            <Image
+                                style={styles.image}                 
+                                source={(themeoptions && themeoptions.event_feed_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.event_feed_file)} : require('../assets/Icons/1.png')}
+                            >
+                            </Image>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.event_feed != null) ? themeoptions.event_feed : 'Event Feed'}</Text>
+                        </Card>
+                    </Pressable>:null
                     }
                     {
                         displaysetting && displaysetting.agenda == '1'?                     
@@ -122,6 +134,18 @@ function Home({ navigation }) {
                             >
                             </Image>
                             <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.notify != null) ? themeoptions.notify : 'Notification'}</Text>
+                        </Card>
+                    </Pressable>:null
+                    }
+                    {displaysetting && displaysetting.support == '1'? 
+                        <Pressable onPress={() => navigation.navigate('Support')}> 
+                        <Card style={styles.innerItem} elevation={3}>
+                            <Image
+                                style={styles.image}                                
+                                source={(themeoptions && themeoptions.support_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.support_file)} : require('../assets/Icons/14.png')}
+                            >
+                            </Image>
+                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.support != null) ? themeoptions.support : 'Support'}</Text>
                         </Card>
                     </Pressable>:null
                     }
@@ -197,30 +221,7 @@ function Home({ navigation }) {
                         </Card>
                     </Pressable>:null
                     }
-                    {displaysetting && displaysetting.support == '1'? 
-                        <Pressable onPress={() => navigation.navigate('Support')}> 
-                        <Card style={styles.innerItem} elevation={3}>
-                            <Image
-                                style={styles.image}                                
-                                source={(themeoptions && themeoptions.support_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.support_file)} : require('../assets/Icons/14.png')}
-                            >
-                            </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.support != null) ? themeoptions.support : 'Support'}</Text>
-                        </Card>
-                    </Pressable>:null
-                    }
-                    {displaysetting && displaysetting.event_feed == '1'? 
-                    <Pressable onPress={() => navigation.navigate('EventFeed')}> 
-                        <Card style={styles.innerItem} elevation={3}>
-                            <Image
-                                style={styles.image}                 
-                                source={(themeoptions && themeoptions.event_feed_file !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.event_feed_file)} : require('../assets/Icons/1.png')}
-                            >
-                            </Image>
-                            <Text style={GlobalStyle.homeIconText}>{(themeoptions && themeoptions.event_feed != null) ? themeoptions.event_feed : 'Event Feed'}</Text>
-                        </Card>
-                    </Pressable>:null
-                    }
+                    
                     
             </View>
         </ScrollView>

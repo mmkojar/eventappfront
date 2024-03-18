@@ -42,7 +42,7 @@ export const getAllChats = (userid,receiver_id) => (dispatch) => {
         /* dispatch({
             type: STOP_LOADER,
         }); */
-        alert(err);
+        //alert(err);
     });    
 }
 
@@ -80,7 +80,7 @@ export const getChatHistory = (userid) => (dispatch) => {
         /* dispatch({
             type: STOP_LOADER,
         }); */
-        alert(err);
+        //alert(err);
     });    
 }
 
@@ -114,7 +114,7 @@ export const sendMessage = (user_id,receiver_id,message) => (dispatch) => {
         /* dispatch({
             type: STOP_LOADER,
         }); */
-        alert(err);
+        //alert(err);
     });    
 }
 
@@ -141,6 +141,6 @@ export const sendMettingRequest = (user_id,receiver_id) => (dispatch) => {
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        //alert(err);
     });    
 }

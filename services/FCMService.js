@@ -27,7 +27,7 @@ class FCMService {
                     this.requestPermission(onRegister);
                 }
             }).catch(error => {
-                console.log("[FCMService] Permission Rejected", error);
+                //console.log("[FCMService] Permission Rejected", error);
             })
     }
 
@@ -37,10 +37,10 @@ class FCMService {
                 if (fcmToken) {
                     onRegister(fcmToken)
                 } else {
-                    console.log("[FCMService] User does not have a devices token")
+                    //console.log("[FCMService] User does not have a devices token")
                 }
             }).catch(error => {
-                console.log("[FCMService] getToken Rejected", error);
+                //console.log("[FCMService] getToken Rejected", error);
             })
     }
 
@@ -49,15 +49,15 @@ class FCMService {
             .then(() => {
                 this.getToken(onRegister);
             }).catch(error => {
-                console.log("[FCMService] Request Permission Rejected", error);
+                //console.log("[FCMService] Request Permission Rejected", error);
             })
     }
 
     deleteToken = () => {
-        console.log("[FCMService] Delete Token");
+        //console.log("[FCMService] Delete Token");
         messaging().deleteToken()
             .catch(error => {
-                console.log("[FCMService] Delete Token Error", error);
+                //console.log("[FCMService] Delete Token Error", error);
             })
     }
 
@@ -67,7 +67,7 @@ class FCMService {
        /*  this.messageListener = messaging().onMessage(async remoteMessage => {
             localNotificationService.cancelAllLocalNotifications();
             if (remoteMessage) {
-                console.log("[FCMService] A new FCm message arrived", remoteMessage);
+                //console.log("[FCMService] A new FCm message arrived", remoteMessage);
                 let notification = null;
                 if (Platform.OS === 'ios') {
                     notification = remoteMessage.notification
@@ -78,10 +78,10 @@ class FCMService {
             }
         }); */
 
-        messaging().setBackgroundMessageHandler(async remoteMessage => {
+        /* messaging().setBackgroundMessageHandler(async remoteMessage => {
             localNotificationService.cancelAllLocalNotifications();
             if (remoteMessage) {
-                console.log("[FCMService] A new FCm message arrived from background", remoteMessage);
+                //console.log("[FCMService] A new FCM message arrived from background", remoteMessage);
                 let notification = null;
                 if (Platform.OS === 'ios') {
                     notification = remoteMessage.notification
@@ -90,11 +90,11 @@ class FCMService {
                 }
                 // onNotification(notification);
             }
-        });
+        }); */
 
         // When Application Running on Background
         messaging().onNotificationOpenedApp(remoteMessage => {
-            console.log("[FCMService] Running From background", remoteMessage);
+            //console.log("[FCMService] A new FCM message Opened from background", remoteMessage);
             if (remoteMessage) {
                 const notification = remoteMessage;
                 notification.userInteraction = true;
@@ -105,7 +105,7 @@ class FCMService {
         //When Application open from quit state
         messaging().getInitialNotification()
             .then(remoteMessage => {
-                console.log("[FCMService] From quit State", remoteMessage);
+                //console.log("[FCMService] From quit State", remoteMessage);
                 if (remoteMessage) {
                     const notification = remoteMessage;
                     notification.userInteraction = true;
@@ -117,21 +117,37 @@ class FCMService {
 
         // Triggered when have new Token
         messaging().onTokenRefresh(fcmToken => {
-            console.log("[FCMService] New token refresh", fcmToken);
+            //console.log("[FCMService] New token refresh", fcmToken);
             onRegister(fcmToken);
         });
     }
 
-    unRegister = () => {
+    // Background state message
+    bgheadlessTask = () => {
+        messaging().setBackgroundMessageHandler(async remoteMessage => {
+            if (remoteMessage) {
+                // //console.log("[FCMService] A new FCm message arrived from background", remoteMessage);
+                // let notification = null;
+                // if (Platform.OS === 'ios') {
+                //     notification = remoteMessage.notification
+                // } else {
+                //     notification = remoteMessage.data
+                // }
+                // onNotification(notification);
+            }
+        });
+    }
+
+    /* unRegister = () => {
         this.messageListener();
     }
 
     stopAlarmRing = async () => {
         if (Platform.OS != 'ios') {
             await messaging().stopAlarmRing();
-            console.log('sdfghjkldfgh', "stopAlarmRing");
+            //console.log('sdfghjkldfgh', "stopAlarmRing");
         }
-    }
+    } */
 }
 
 export const fcmService = new FCMService()

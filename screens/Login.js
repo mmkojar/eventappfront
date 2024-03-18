@@ -35,6 +35,7 @@ function Login() {
         else {            
             Keyboard.dismiss();            
             // console.log(token);
+            SetIdentity('');
             dispatch(loginAction(token,Platform.OS,identity));
         }
     }

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendMessage, getAllChats } from '../components/redux/actions/chatActions';
 // import { START_LOADER, STOP_LOADER } from '../components/redux/actions/type';
 import useThemeStyle from '../components/utils/useThemeStyle';
-import { fcmService } from '../services/FCMService';
-import { localNotificationService } from '../services/LocalNotificationService';
+// import { fcmService } from '../services/FCMService';
+// import { localNotificationService } from '../services/LocalNotificationService';
 // import { navigate } from '../services/RootNavigation';
 
 const ChatBox = ({ route, navigation }) => {
@@ -21,15 +21,15 @@ const ChatBox = ({ route, navigation }) => {
     const [message,Setmessage] = useState();
 
     useEffect(() => {
-        fcmService.register(onRegister,onNotification,onOpenNotification)
-        localNotificationService.configure(onOpenNotification);
+        // fcmService.register(onRegister,onNotification,onOpenNotification)
+        // localNotificationService.configure(onOpenNotification);
         
         // dispatch({
         //     type: START_LOADER,
         // });
         const chatInterval = setInterval(() => {            
             dispatch(getAllChats(authData.data.user_id,receiver_id));
-        }, 500);
+        }, 1000);
 
         return () => {             
             clearInterval(chatInterval);
@@ -58,7 +58,7 @@ const ChatBox = ({ route, navigation }) => {
 
     // For Notification handles
     const onRegister = () => {}
-    const onNotification = (notify) => {
+   /*  const onNotification = (notify) => {
         const options = {
           soundName: 'default',
           playSound: true,
@@ -73,13 +73,13 @@ const ChatBox = ({ route, navigation }) => {
             notify,
             options,
           )
-        }
-     }
+        } 
+     }*/
       
       
-    const onOpenNotification = async (notify) => {
+    /*const onOpenNotification = async (notify) => {
     
-        /* console.log("xxxxxxx:",notify);
+         console.log("xxxxxxx:",notify);
         if(notify.data.type=="message") {
             if(notify.userInteraction == true) {
                 dispatch(getAllChats(notify.data.sender_id,notify.data.receiver_id));
@@ -91,8 +91,8 @@ const ChatBox = ({ route, navigation }) => {
                 // });
                 // }
             
-        } */
-    }
+        } 
+    }*/
 
     return (
         <KeyboardAvoidingView 

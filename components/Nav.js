@@ -41,10 +41,11 @@ const Nav = ({refer}) => {
         { isAuthenticated ?  (              
             <Stack.Navigator initialRouteName='Home' 
                 screenOptions={({route}) => ({
-                animationEnabled:false,
+                // animationEnabled:false,
                 headerStyle: {
                     backgroundColor: theme.colors.primary,
                 },
+                headerBackTitle:"Back",
                 headerTintColor:themeoptions.title_color,
                 headerTitleAlign:'center',
                 headerTitleStyle: {

@@ -54,4 +54,7 @@ allprojects {
             }
         }
     }
+    tasks.withType(JavaCompile){
+        options.compilerArgs <<"-Xlint:deprecation"
+    }
 }

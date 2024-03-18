@@ -40,7 +40,7 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
     const formdata = JSON.stringify({device_notification_id,devicetype,identity})
     axios.post(api_url+'login', formdata, config)
     .then((res) => {
-        // console.log(res);
+        // console.log(res.data);
         if(res.data.status === "true") {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -59,11 +59,11 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
         });
     })
     .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        //alert(err);
     });
 };
 
@@ -94,7 +94,7 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        //alert(err);
     });    
 }
  */
@@ -108,7 +108,7 @@ export const profileAction = (id,first_name,last_name,phone,email,city) => (disp
     
     axios.post(api_url+'user/edit/'+id, formdata, config)
     .then((res) => {   
-        console.log(res.data);     
+        // console.log(res.data);     
         if(res.data.status === "true") {
             dispatch({
                 type: UPDATE_PROFILE,
@@ -130,7 +130,7 @@ export const profileAction = (id,first_name,last_name,phone,email,city) => (disp
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        //alert(err);
     });
 };
 
@@ -142,7 +142,7 @@ export const checkToken = (token) => (dispatch) => {
     .then((res) => {     
         // console.log(res.data);
         if(res && res.data.status == 'false') {
-          alert('Employee Id already using on another device!'); 
+          alert('Error! No Device Token Found'); 
           dispatch(logoutAction());
         }
        /*  dispatch({
@@ -153,7 +153,7 @@ export const checkToken = (token) => (dispatch) => {
        /*  dispatch({
             type: STOP_LOADER,
         }); */
-        alert(err);
+        //alert(err);
     });
   }
 
@@ -176,7 +176,7 @@ export const logoutAction = () => (dispatch) => {
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        //alert(err);
     }    
 };
 

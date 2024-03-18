@@ -36,9 +36,9 @@ function Profile() {
         if(firstname == '') {
             customAlert('Enter First Name');
         }
-        else if(lastname == '') {
-            customAlert('Enter Last Name');            
-        }
+        // else if(lastname == '') {
+        //     customAlert('Enter Last Name');            
+        // }
         else if(city == '') {
             customAlert('Enter city');
         }

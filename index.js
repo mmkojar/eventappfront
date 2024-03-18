@@ -6,9 +6,12 @@ import {name as appName} from './app.json';
 import { Provider as StoreProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import factory from './components/redux/store';
+import { fcmService } from './services/FCMService';
 // import PushNotification from 'react-native-push-notification'
 
 const { store, persistor } = factory();
+
+fcmService.bgheadlessTask();
 
 export const Main = () => {  
         

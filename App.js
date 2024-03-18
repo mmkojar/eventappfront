@@ -10,6 +10,7 @@ import { fcmService } from './services/FCMService';
 // import { checkToken } from './components/redux/actions/authActions';
 import SplashScreen from 'react-native-splash-screen'
 import useThemeStyle from './components/utils/useThemeStyle';
+import { useSelector } from 'react-redux';
 // import factory from './components/redux/store';
 
 // const { store } = factory();
@@ -18,6 +19,8 @@ const App = () => {
  
   const [theme ] = useThemeStyle();
 
+  const authData = useSelector((state) => state.auth);
+
   useEffect(() => {
     fcmService.registerAppWithFCM();
     fcmService.register(onRegister,onOpenNotification)
@@ -25,11 +28,23 @@ const App = () => {
     localNotificationService.configure(onOpenNotification);
     // console.log(localNotificationService.getAllChannels());
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      // console.log("remoteMessage:",remoteMessage);
       if (remoteMessage) {
-        if (Platform.OS === 'ios') {
-          onNotification(remoteMessage.notification);
+        let rid = Platform.OS === 'ios' ? remoteMessage.notification.receiver_id : remoteMessage.data.receiver_id
+        if(navigationRef.current.getCurrentRoute().name !== 'ChatBox') {
+          if (Platform.OS === 'ios') {
+            onNotification(remoteMessage.notification);
+          } else {
+            onNotification(remoteMessage.data);
+          }
         } else {
-          onNotification(remoteMessage.data);
+          if(authData.data.user_id!==rid) {
+            if (Platform.OS === 'ios') {
+              onNotification(remoteMessage.notification);
+            } else {
+              onNotification(remoteMessage.data);
+            }
+          }
         }
       }
     });
@@ -61,7 +76,7 @@ const App = () => {
   
   const onOpenNotification = async (notify) => {
     // check for auth    
-    console.log("notify:",notify);
+    // console.log("notify:",notify);
     if(notify.userInteraction == true) { 
       if(notify.data.type=="message") {
         navigate('ChatBox', {

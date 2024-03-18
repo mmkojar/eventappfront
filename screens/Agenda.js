@@ -6,9 +6,16 @@ import { getAgenda } from '../components/redux/actions/delegateActions';
 import useThemeStyle from '../components/utils/useThemeStyle';
 import { TabView,TabBar, SceneMap } from 'react-native-tab-view';
 import { Table, Row, Rows } from 'react-native-table-component';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+const Tab = createMaterialTopTabNavigator();
 
-const tabPages = (tableHead,widthArr,tableData) => {
+const tabPages = (tableData) => {
+
+    const widthArr = [100, 140, 240]
+    const tableHead = ['Time', 'Agenda', 'Venue'];
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }} >
             <ScrollView horizontal={true}>
@@ -37,99 +44,67 @@ const tabPages = (tableHead,widthArr,tableData) => {
     )
 }
 
-const Agenda = ({ navigation }) => {
+const tabPages1 = () => {
 
-    const agenda = useSelector((state) => state.delegate.agenda);
-
-    const layout = useWindowDimensions();
-
-    const [theme, GlobalStyle] = useThemeStyle();
-
-    const dispatch = useDispatch();
-
-    const tableHead = ['Time', 'Agenda', 'Venue'];
+    const agenda = useSelector((state) => state.delegate.agenda); 
+    
     const tableData = [];
     agenda&&agenda.filter((item) => {
         if (item.title_id === '1') {
             tableData.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
         }
     })
-    const tableData1 = [];
+
+    return tabPages(tableData)
+}
+const tabPages2 = () => {
+
+    const agenda = useSelector((state) => state.delegate.agenda); 
+    
+    const tableData = [];
     agenda&&agenda.filter((item) => {
         if (item.title_id === '2') {
-            tableData1.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
+            tableData.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
         }
     })
-    const tableData2 = [];
+
+    return tabPages(tableData)
+}
+const tabPages3 = () => {
+
+    const agenda = useSelector((state) => state.delegate.agenda); 
+    
+    const tableData = [];
     agenda&&agenda.filter((item) => {
         if (item.title_id === '3') {
-            tableData2.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
+            tableData.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
         }
     })
-    const tableData3 = [];
+
+    return tabPages(tableData)
+}
+const tabPages4 = () => {
+
+    const agenda = useSelector((state) => state.delegate.agenda); 
+    
+    const tableData = [];
     agenda&&agenda.filter((item) => {
         if (item.title_id === '4') {
-            tableData3.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
+            tableData.push([item.agenda_time, item.agenda_name, item.agenda_venue]);
         }
     })
+
+    return tabPages(tableData)
+}
+
+const Agenda = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+
+    
     useEffect(() => {
         dispatch(getAgenda());
     }, [])
-    const widthArr = [100, 140, 240]
-    const FirstRoute = () => (
-        tabPages(tableHead,widthArr,tableData)
-        // <View style={{ flex: 1, backgroundColor: '#fff' }} >
-        //     <ScrollView horizontal={true}>
-        //         <View>
-        //             <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-        //                 <Row data={tableHead} widthArr={widthArr} style={styles.head} textStyle={{ textAlign: 'center',fontSize:18,fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }} />
-        //             </Table>
-        //             <ScrollView style={{ marginTop: -1 }}>
-        //                 <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-        //                     {
-        //                         tableData.map((rowData, index) => (
-        //                             <Row
-        //                                 key={index}
-        //                                 data={rowData}
-        //                                 widthArr={widthArr}
-        //                                 style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
-        //                                 textStyle={{ textAlign: 'center',fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular' }}
-        //                             />
-        //                         ))
-        //                     }
-        //                 </Table>
-        //             </ScrollView>
-        //         </View>
-        //     </ScrollView>
-        // </View>
-    );
-
-    const SecondRoute = () => (
-        tabPages(tableHead,widthArr,tableData1)
-    );
-
-    const ThirdRoute = () => (
-        tabPages(tableHead,widthArr,tableData2)
-    );
-
-    const FourthRoute = () => (
-        tabPages(tableHead,widthArr,tableData3)
-    );
-
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
-        { key: 'first', title: 'Day1' },
-        { key: 'second', title: 'Day2' },
-        { key: 'third', title: 'Day3' },
-        { key: 'forth', title: 'Day4' },
-    ]);
-
-    const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-        third: ThirdRoute,
-        forth: FourthRoute,
-    });
 
     /* const pressHandler = (item) => {
         navigation.navigate('AgendaDetail', {
@@ -143,37 +118,32 @@ const Agenda = ({ navigation }) => {
     } */
 
     return (
-        <View style={GlobalStyle.container}>
-            <TabView
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                initialLayout={{ width: layout.width }}
-                // style={{backgroundColor: theme.colors.primary}}
-                renderTabBar={props => <TabBar {...props} style={{backgroundColor: theme.colors.primary}} labelStyle={{fontFamily:Platform.OS == 'ios' ?  'FontAwesome' : 'VarelaRound-Regular'}}/>} 
-
-            />
-            {/* <FlatList
-                    data={agenda}
-                    // numColumns={1}
-                    keyExtractor={(item) => item.agenda_id}
-                    renderItem={({item}) => (
-                        <Pressable onPress={() => pressHandler(item)}>
-                            <Card.Title
-                                style={GlobalStyle.cardTitle}
-                                title={item.agenda_name}
-                                titleNumberOfLines={3}
-                                titleStyle={styles.title}
-                                left={(props) => <IconButton {...props} size={24} icon="send" color={GlobalStyle.primarycolor.color} onPress={() => pressHandler(item)} />}
-                                leftStyle={{marginLeft:-10}}
-                                right={(props) =>  <Text {...props} style={styles.rightText}>{item.agenda_date}{"\n"}{item.agenda_time}</Text>}
-                                rightStyle={[styles.right,{backgroundColor:GlobalStyle.primarycolor.color}]}
-                            />
-                        </Pressable>
-                )}
-                /> */}
-        </View>
+        <Tab.Navigator>
+            <Tab.Screen name="Day1" component={tabPages1} />
+            <Tab.Screen name="Day2" component={tabPages2} />
+            <Tab.Screen name="Day3" component={tabPages3} />
+            <Tab.Screen name="Day4" component={tabPages4} />
+        </Tab.Navigator>
     )
+    {/* <FlatList
+            data={agenda}
+            // numColumns={1}
+            keyExtractor={(item) => item.agenda_id}
+            renderItem={({item}) => (
+                <Pressable onPress={() => pressHandler(item)}>
+                    <Card.Title
+                        style={GlobalStyle.cardTitle}
+                        title={item.agenda_name}
+                        titleNumberOfLines={3}
+                        titleStyle={styles.title}
+                        left={(props) => <IconButton {...props} size={24} icon="send" color={GlobalStyle.primarycolor.color} onPress={() => pressHandler(item)} />}
+                        leftStyle={{marginLeft:-10}}
+                        right={(props) =>  <Text {...props} style={styles.rightText}>{item.agenda_date}{"\n"}{item.agenda_time}</Text>}
+                        rightStyle={[styles.right,{backgroundColor:GlobalStyle.primarycolor.color}]}
+                    />
+                </Pressable>
+        )}
+        /> */}
 }
 
 

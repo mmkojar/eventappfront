@@ -29,7 +29,7 @@ function Exhibitors() {
                             <Image source={{uri: Config.imgurl+item.ex_image}} style={GlobalStyle.avatar}/>                       
                             <Card.Content style={GlobalStyle.carContent}>
                                 <Paragraph style={[GlobalStyle.layoutPara,{fontSize:18,marginTop:6}]}>{item.ex_name}</Paragraph>
-                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.web_url)}><Text style={{color:GlobalStyle.primarycolor.color}} >{item.web_url}</Text></Caption>
+                                <Caption style={GlobalStyle.layoutPara} onPress={() => Linking.openURL(item.web_url)}><Text style={{color:GlobalStyle.primarycolor.color,textAlign:'center'}} >{item.web_url}</Text></Caption>
                             </Card.Content>
                         </Card>
                     </Fragment>

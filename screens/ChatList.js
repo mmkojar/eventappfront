@@ -26,7 +26,7 @@ const ChatList = ({ navigation }) => {
         const chatInterval = setInterval(() => {            
         dispatch(getChatHistory(authData.data.user_id));
         }, 1000)
-        console.log(chathistory);
+
         if(authData.data.group=="admin") {
             setMsgData(chathistory);
             setFullData(chathistory);

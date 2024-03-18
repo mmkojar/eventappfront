@@ -50,7 +50,7 @@ const PollView = ({ route }) => {
           }
       })
       .catch((err) => {
-          alert(err);
+          //alert(err);
       });
     }        
     

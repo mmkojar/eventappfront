@@ -33,6 +33,6 @@ export const getSettings = () => (dispatch) => {
         }
     })
     .catch((err) => {    
-        alert(err);
+        // alert(err);
     });
 }

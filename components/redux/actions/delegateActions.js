@@ -107,7 +107,7 @@ export const updatePolls = (pid,paid,user_id) => (dispatch) => {
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        // alert(err);
     });
 }
 
@@ -151,6 +151,6 @@ const fetchAxios = (dispatch,param,action) => {
         dispatch({
             type: STOP_LOADER,
         });
-        alert(err);
+        // alert(err);
     });
 }
