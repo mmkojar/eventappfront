@@ -94,7 +94,7 @@ const Delegates = ({ navigation }) => {
                         />
                     </View>
                 }                
-                keyExtractor={(item) => item.id}            
+                keyExtractor={(item) => item.id}
                 data={delgdata && delgdata.filter((item) => item.id !== authData.data.user_id)}
                 renderItem={({item}) => (
                     <Pressable onPress={() => pressHandler(item)}>

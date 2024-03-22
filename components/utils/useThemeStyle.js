@@ -74,7 +74,7 @@ const useThemeStyle = () => {
         card:{
             marginHorizontal:4,
             marginBottom:10,
-            borderWidth:0.6,
+            borderWidth:0.4,
             borderColor:theme.colors.primary,
             borderRadius:6,
         },

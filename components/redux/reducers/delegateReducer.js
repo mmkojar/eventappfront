@@ -1,9 +1,11 @@
 import { 
     GET_ABOUT_EVENT, GET_SPEAKERS, GET_AGENDA, GET_DELEGATES, 
-    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ, GET_EVENT_FEED 
+    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI, NOTIFI_COUNT 
 } from '../actions/type';
 
 const initialState = {
+    notifi:null,
+    notificount:null,
     about:null,
     speaker:null,
     sponsor:null,
@@ -19,6 +21,8 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case GET_NOTIFI: return {...state, notifi: action.payload }
+        case NOTIFI_COUNT: return {...state, notificount: action.payload }
         case GET_ABOUT_EVENT:
             return {
                 ...state,

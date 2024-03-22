@@ -7,7 +7,6 @@ import { navigationRef, navigate } from './services/RootNavigation';
 import messaging from '@react-native-firebase/messaging';
 import { localNotificationService } from './services/LocalNotificationService';
 import { fcmService } from './services/FCMService';
-// import { checkToken } from './components/redux/actions/authActions';
 import SplashScreen from 'react-native-splash-screen'
 import useThemeStyle from './components/utils/useThemeStyle';
 import { useSelector } from 'react-redux';
@@ -30,20 +29,17 @@ const App = () => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       // console.log("remoteMessage:",remoteMessage);
       if (remoteMessage) {
-        let rid = Platform.OS === 'ios' ? remoteMessage.notification.receiver_id : remoteMessage.data.receiver_id
+        // let rid = Platform.OS === 'ios' ? remoteMessage.notification.receiver_id : remoteMessage.data.receiver_id
         if(navigationRef.current.getCurrentRoute().name !== 'ChatBox') {
-          if (Platform.OS === 'ios') {
-            onNotification(remoteMessage.notification);
-          } else {
-            onNotification(remoteMessage.data);
-          }
+          onNotification(remoteMessage);
         } else {
-          if(authData.data.user_id!==rid) {
-            if (Platform.OS === 'ios') {
+          if(authData.data.user_id!==remoteMessage.data.receiver_id) {
+            onNotification(remoteMessage);
+            /* if (Platform.OS === 'ios') {
               onNotification(remoteMessage.notification);
             } else {
               onNotification(remoteMessage.data);
-            }
+            } */
           }
         }
       }
@@ -59,6 +55,7 @@ const App = () => {
   }
 
   const onNotification = (notify) => {
+    // console.log("nnn:",notify);
     const options = {
       soundName: 'default',
       playSound: true,
@@ -66,8 +63,8 @@ const App = () => {
     }
     // if(navigationRef.current.getCurrentRoute().name !== 'ChatBox') {
       localNotificationService.showNotification(
-        notify.title,
-        notify.body,
+        notify.data.title,
+        notify.data.body,
         notify,
         options,
       )
@@ -76,7 +73,7 @@ const App = () => {
   
   const onOpenNotification = async (notify) => {
     // check for auth    
-    // console.log("notify:",notify);
+    console.log("notify click:",notify.data);
     if(notify.userInteraction == true) { 
       if(notify.data.type=="message") {
         navigate('ChatBox', {
@@ -86,6 +83,8 @@ const App = () => {
       }
       else if(notify.data.type=="polling")  {
         navigate('Polling');
+      } else {
+        navigate('Notification');
       }
     }
   };

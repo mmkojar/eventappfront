@@ -1,5 +1,6 @@
 import PushNotification from "react-native-push-notification"
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import { Platform } from "react-native";
 // import { Platform } from "react-native";
 
 class LocalNotificationService { 
@@ -9,11 +10,14 @@ class LocalNotificationService {
                 // console.log("[LocalNotificationService] onRegister:",token);
             },
             onNotification: function (notification) {
-                console.log("[LocalNotificationService] onNotification:",notification);
+                // if(Platform.OS==='ios'){
+                    notification.data = notification.data.data;
+                // }
+                // console.log("[LocalNotificationService] onNotification:",notification);
                 if(!notification?.data) {
                     return
                 }
-                // notification.userInteraction = true;
+                
                 onOpenNotification(notification);
 
                  // (required) Called when a remote is received or opened, or local notification is opened
@@ -68,19 +72,36 @@ class LocalNotificationService {
     showNotification = (title, message, data = {}, options = {}) => {
 
         //For Android
-        PushNotification.localNotification({
-            /* Android Only Properties */
-            ...this.buildAndroidNotification(title, message, data, options),
-            channelId: "eventapp-id",
-            title : title || "",
-            message : message || "",
-            playSound : options.playSound || true,
-            soundName : options.soundName || 'default',
-            userInteraction : true , // BOOLEAN : If notification was opened by the user from notification
-            badge : true,             
-            picture:'https://i.pinimg.com/originals/a1/47/29/a14729422f50f6c13e835572982b58e2.jpg',
-            userInfo: data,
-        });          
+        if(Platform.OS=='android') {
+            PushNotification.localNotification({
+                /* Android Only Properties */
+                ...this.buildAndroidNotification(title, message, data, options),
+                channelId: "eventapp-id",
+                title : title || "",
+                message : message || "",
+                playSound : options.playSound || true,
+                soundName : options.soundName || 'default',
+                userInteraction : true , // BOOLEAN : If notification was opened by the user from notification
+                badge : true,             
+                picture:'https://i.pinimg.com/originals/a1/47/29/a14729422f50f6c13e835572982b58e2.jpg',
+                userInfo: data,
+            });
+        } else {
+            PushNotificationIOS.addNotificationRequest({
+
+                id: "eventapp-id",
+                title : title || "",
+                // subtitle : message || "",
+                body : message || "",
+                playSound : options.playSound || true,
+                soundName : options.soundName || 'default',
+                userInteraction : true , // BOOLEAN : If notification was opened by the user from notification
+                badge : true,             
+                image:'https://i.pinimg.com/originals/a1/47/29/a14729422f50f6c13e835572982b58e2.jpg',
+                userInfo: data,
+            });
+        }
+                
     }
 
     buildAndroidNotification = ( title, message, data = {}, options = {}) => {
@@ -103,7 +124,7 @@ class LocalNotificationService {
     }
 
     removeDeliveredNotificationByID = (notificationId) => {
-        console.log("[LocalNotificationService] removeDeliveredNotificationByID:", notificationId);
+        // console.log("[LocalNotificationService] removeDeliveredNotificationByID:", notificationId);
         PushNotification.cancelLocalNotification({id: `${notificationId}`})
     }
 

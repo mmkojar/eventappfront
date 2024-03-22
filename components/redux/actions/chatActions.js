@@ -49,9 +49,9 @@ export const getAllChats = (userid,receiver_id) => (dispatch) => {
 // ------Get Chats History------
 export const getChatHistory = (userid) => (dispatch) => {
 
-    // dispatch({
-    //     type: START_LOADER,
-    // }); 
+    dispatch({
+        type: START_LOADER,
+    }); 
     const formdata = JSON.stringify({"user_id":userid})
     
     axios.post(api_url+'chat/chat_history', formdata ,config)
@@ -61,25 +61,29 @@ export const getChatHistory = (userid) => (dispatch) => {
                 type: GET_USER_CHATS,
                 payload: res.data.data,
             });
+            dispatch({
+                type: STOP_LOADER,
+            });   
         }
         else {
             dispatch({
                 type: GET_USER_CHATS,
                 payload: [],
             });
+            dispatch({
+                type: STOP_LOADER,
+            });   
         }
         dispatch({
             type: GET_ADMIN_CHATS,
             payload: res.data.admin,
         });
-        /* dispatch({
-            type: STOP_LOADER,
-        });  */   
+        
     })
     .catch((err) => {
-        /* dispatch({
+        dispatch({
             type: STOP_LOADER,
-        }); */
+        });
         //alert(err);
     });    
 }

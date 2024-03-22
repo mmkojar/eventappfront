@@ -23,8 +23,8 @@ const ChatList = ({ navigation }) => {
 
     useEffect(() => {
 
-        const chatInterval = setInterval(() => {            
-        dispatch(getChatHistory(authData.data.user_id));
+        setTimeout(() => {            
+            dispatch(getChatHistory(authData.data.user_id));
         }, 1000)
 
         if(authData.data.group=="admin") {
@@ -34,7 +34,7 @@ const ChatList = ({ navigation }) => {
             setMsgData(admins);
         }
         return () =>{
-            clearInterval(chatInterval);
+            // clearInterval(chatInterval);
         }
     }, [])
         

@@ -5,12 +5,13 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import useThemeStyle from '../components/utils/useThemeStyle';
 import Config from '../components/utils/Config';
 import { fcmService } from '../services/FCMService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkToken } from '../components/redux/actions/authActions';
 
 function Home({ navigation }) {
 
     const [theme,GlobalStyle, themeoptions, displaysetting] = useThemeStyle();
+    const authData = useSelector((state) => state.auth);
 
     useEffect(() => {
         
@@ -25,7 +26,7 @@ function Home({ navigation }) {
 
     const dispatch = useDispatch();
     const onRegister = (res) => {
-        dispatch(checkToken(res));
+        dispatch(checkToken(authData.data.user_id,res));
     }
 
     React.useLayoutEffect(() => {
@@ -161,7 +162,7 @@ function Home({ navigation }) {
                         </Card>
                     </Pressable>:null
                     }
-                    {displaysetting && displaysetting.qr == '1'? 
+                    {displaysetting && displaysetting.qr == '1' && authData.data.group=="admin" ? 
                         <Pressable onPress={() => navigation.navigate('QRScan')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image

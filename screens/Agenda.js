@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
-import { View, FlatList, Pressable, StyleSheet, useWindowDimensions, ScrollView, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform } from 'react-native';
 // import { Card, IconButton, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAgenda } from '../components/redux/actions/delegateActions';
 import useThemeStyle from '../components/utils/useThemeStyle';
-import { TabView,TabBar, SceneMap } from 'react-native-tab-view';
 import { Table, Row, Rows } from 'react-native-table-component';
-import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();

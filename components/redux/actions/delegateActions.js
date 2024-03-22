@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { 
     START_LOADER, STOP_LOADER, GET_AGENDA,  GET_ABOUT_EVENT, 
-    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ, GET_EVENT_FEED
+    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI
 } from './type';
 import Config from '../../utils/Config';
 
@@ -107,7 +107,7 @@ export const updatePolls = (pid,paid,user_id) => (dispatch) => {
         dispatch({
             type: STOP_LOADER,
         });
-        // alert(err);
+        //alert(err);
     });
 }
 
@@ -115,6 +115,12 @@ export const updatePolls = (pid,paid,user_id) => (dispatch) => {
 export const getNotes = () => (dispatch) => {
 
     fetchAxios(dispatch,`note`,GET_NOTES);
+}
+
+// ------Notifi------
+export const getNotify = () => (dispatch) => {
+
+    fetchAxios(dispatch,`notifications`,GET_NOTIFI);
 }
 
 const fetchAxios = (dispatch,param,action) => {
@@ -151,6 +157,6 @@ const fetchAxios = (dispatch,param,action) => {
         dispatch({
             type: STOP_LOADER,
         });
-        // alert(err);
+        //alert(err);
     });
 }

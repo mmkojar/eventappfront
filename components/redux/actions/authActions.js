@@ -94,7 +94,7 @@ export const loginAction = (device_notification_id,devicetype,identity) => (disp
         dispatch({
             type: STOP_LOADER,
         });
-        //alert(err);
+        alert(err);
     });    
 }
  */
@@ -134,13 +134,13 @@ export const profileAction = (id,first_name,last_name,phone,email,city) => (disp
     });
 };
 
-export const checkToken = (token) => (dispatch) => {
+export const checkToken = (user_id,token) => (dispatch) => {
     /* dispatch({
         type: START_LOADER,
     }); */
-    axios.get(api_url+`user/checktoken/${token}`, config)
+    const formdata = JSON.stringify({user_id,token})
+    axios.post(api_url+`user/checktoken`,formdata, config)
     .then((res) => {     
-        // console.log(res.data);
         if(res && res.data.status == 'false') {
           alert('Error! No Device Token Found'); 
           dispatch(logoutAction());
@@ -153,7 +153,8 @@ export const checkToken = (token) => (dispatch) => {
        /*  dispatch({
             type: STOP_LOADER,
         }); */
-        //alert(err);
+        // alert(err);
+        // console.log(err);
     });
   }
 
