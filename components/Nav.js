@@ -23,7 +23,7 @@ import SupportScreen from '../screens/Support';
 import PollsScreen from '../screens/Polling';
 import PollViewScreen from '../screens/PollView';
 import ScanQR from '../screens/ScanQR';
-import FacebookScreen from '../screens/Facebook';
+import EventSelectionScreen from '../screens/EventSelection';
 import useThemeStyle from './utils/useThemeStyle';
 
 const Stack = createStackNavigator();
@@ -98,7 +98,7 @@ const Nav = ({refer}) => {
             options={{
                 title:'QR Scan',                   
             }}/>
-            <Stack.Screen name="Facebook" component={FacebookScreen} />
+            <Stack.Screen name="EventSelection" component={EventSelectionScreen} />
             </Stack.Navigator>
             )
             :

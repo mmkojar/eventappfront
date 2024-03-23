@@ -1,8 +1,8 @@
 import React,{useRef, useState} from 'react'
 import {
-    Platform,
+    View,
+    Image,
     Alert,
-    Linking
   } from 'react-native';
   import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
@@ -10,6 +10,7 @@ import { RNCamera } from 'react-native-camera';
 
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Config from '../components/utils/Config';
 
 const ScanQR = ({navigation}) => {
 
@@ -33,21 +34,26 @@ const ScanQR = ({navigation}) => {
           Alert.alert('Error','Invalid QR Code',[
             {text: 'Go Back', onPress: () => navigation.navigate('Home')}
           ],{cancelable:true})
-        }
+        } 
         else if((authData.data.user_id!==myarray[1])&&authData.data.group!=="admin"){
           Alert.alert('Error','QR Code mismatch',[
             {text: 'Go Back', onPress: () => navigation.navigate('Home')}
           ],{cancelable:true})
         }
         else {
-          if(authData.data.group=="admin") {
-            var url = 'https://info2ideas.com/event_app/select_event/'+myarray[1]+'/'+myarray[0]+'/'+authData.data.first_name+'-'+authData.data.last_name+'-ADMIN';
-          } else {
-            var url = 'https://info2ideas.com/event_app/select_event/'+myarray[1]+'/'+myarray[0]+'/'+authData.data.first_name+'-'+authData.data.last_name;
-          }
-            Linking.openURL(url).catch(err =>
-              console.error('An error occured', err)
-          );
+          // if(authData.data.group=="admin") {
+          //   var url = 'https://info2ideas.com/event_app/select_event/'+myarray[1]+'/'+myarray[0]+'/'+authData.data.first_name+'-'+authData.data.last_name+'-ADMIN';
+          // } else {
+          //   var url = 'https://info2ideas.com/event_app/select_event/'+myarray[1]+'/'+myarray[0]+'/'+authData.data.first_name+'-'+authData.data.last_name;
+          // }
+          navigation.navigate('EventSelection',{
+            user_id:myarray[1],
+            qr_id:myarray[0],
+            scan_by:authData.data.first_name+'-'+authData.data.last_name+'-ADMIN',
+          })
+          // Linking.openURL(url).catch(err =>
+          //     console.error('An error occured', err)
+          // );
           /* const formdata = JSON.stringify({"user_id":myarray[1],"qr_code_id":myarray[0],"device":Platform.OS})
           axios.post(Config.api_url+'QR/scanned', formdata ,{
             headers: { 
@@ -76,7 +82,8 @@ const ScanQR = ({navigation}) => {
     };
 
     return (
-    <QRCodeScanner
+      authData.data.group=='admin'?
+      <QRCodeScanner
         onRead={onSuccess}
         flashMode={RNCamera.Constants.FlashMode.auto}
         fadeIn={false}
@@ -91,6 +98,14 @@ const ScanQR = ({navigation}) => {
         //     </TouchableOpacity>
         // }
         />
+        :
+        <View>
+            <Image
+                style={{height:400,width:400,alignSelf: 'center',marginVertical:100,justifyContent:'center'}} 
+                source={{uri:Config.imgurl+(authData && authData.data.qr_code)}}
+            >
+            </Image>
+        </View>
   )
 }
 

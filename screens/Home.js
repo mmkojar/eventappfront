@@ -59,10 +59,14 @@ function Home({ navigation }) {
 
     return (
         <ScrollView>
-            <Image
-                style={{height:120,width:310,alignSelf:'center'}}
-                source={(themeoptions && themeoptions.lc_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.lc_logo)} : require('../assets/app_banner.png')}
-            />  
+            {
+                 displaysetting && displaysetting.hp_main_logo == '1'?
+                 <Image
+                    style={{height:120,width:310,alignSelf:'center'}}
+                    source={(themeoptions && themeoptions.hp_main_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.hp_main_logo)} : require('../assets/app_banner.png')}
+                /> :null
+            }
+            
             <View style={styles.container}>
                     {
                         displaysetting && displaysetting.about == '1'?
@@ -162,7 +166,7 @@ function Home({ navigation }) {
                         </Card>
                     </Pressable>:null
                     }
-                    {displaysetting && displaysetting.qr == '1' && authData.data.group=="admin" ? 
+                    {displaysetting && displaysetting.qr == '1' ? 
                         <Pressable onPress={() => navigation.navigate('QRScan')}> 
                         <Card style={styles.innerItem}elevation={3}>
                             <Image
