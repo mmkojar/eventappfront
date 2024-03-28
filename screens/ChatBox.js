@@ -29,7 +29,7 @@ const ChatBox = ({ route, navigation }) => {
         // });
         const chatInterval = setInterval(() => {            
             dispatch(getAllChats(authData.data.user_id,receiver_id));
-        }, 1000);
+        }, 100);
 
         return () => {             
             clearInterval(chatInterval);
@@ -52,7 +52,8 @@ const ChatBox = ({ route, navigation }) => {
     }, [navigation]);
         
     const pressHandler = () => {
-        dispatch(sendMessage(authData.data.user_id,receiver_id,message));        
+        dispatch(sendMessage(authData.data.user_id,receiver_id,message));
+        // dispatch(getAllChats(authData.data.user_id,receiver_id));
         Setmessage('');
     }
 
@@ -94,6 +95,7 @@ const ChatBox = ({ route, navigation }) => {
         } 
     }*/
 
+    const keydate = new Date();
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : ""} style={{flex:1}}
@@ -102,7 +104,7 @@ const ChatBox = ({ route, navigation }) => {
             {/* <TouchableWithoutFeedback  onPress={() => Keyboard.dismiss()}> */}
                 <View style={styles.Main}>
                     <FlatList
-                        keyExtractor={(item) => item.chat_detail_id}
+                        keyExtractor={(item) => item.chat_detail_id+'-'+keydate}
                         data={chatMsgs}
                         inverted={true}
                         renderItem={({item}) => (

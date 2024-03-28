@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { 
     START_LOADER, STOP_LOADER, GET_AGENDA,  GET_ABOUT_EVENT, 
-    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI
+    GET_SPEAKERS,  GET_POLLS, UPDATE_POLLS, GET_DELEGATES, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI, GET_SUPPORT
 } from './type';
 import Config from '../../utils/Config';
 
@@ -121,6 +121,12 @@ export const getNotes = () => (dispatch) => {
 export const getNotify = () => (dispatch) => {
 
     fetchAxios(dispatch,`notifications`,GET_NOTIFI);
+}
+
+// ------Support------
+export const getSupport = () => (dispatch) => {
+
+    fetchAxios(dispatch,`support`,GET_SUPPORT);
 }
 
 const fetchAxios = (dispatch,param,action) => {

@@ -1,6 +1,6 @@
 import { 
     GET_ABOUT_EVENT, GET_SPEAKERS, GET_AGENDA, GET_DELEGATES, 
-    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI, NOTIFI_COUNT 
+    GET_POLLS, UPDATE_POLLS, CLEAR_DATA, ERROR, GET_POLL, GET_EXHIBITORS, GET_SPONSORS, GET_NOTES, ADD_NOTES, EDIT_NOTES, GET_FAQ, GET_EVENT_FEED, GET_NOTIFI, NOTIFI_COUNT, GET_SUPPORT 
 } from '../actions/type';
 
 const initialState = {
@@ -15,8 +15,9 @@ const initialState = {
     faq:null,
     delegates: null,
     notes:null,
+    support:null,
     polls:null,
-    poll:null,
+    poll:null
 };
 
 export default function (state = initialState, action) {
@@ -72,6 +73,11 @@ export default function (state = initialState, action) {
             return {
                 notes:[...action.payload, ...state.data]
             };
+        case GET_SUPPORT:
+            return {
+                ...state,
+                support:action.payload,
+            };            
         case GET_POLLS:
             return {
                 ...state,

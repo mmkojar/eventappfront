@@ -13,6 +13,8 @@ function Home({ navigation }) {
     const [theme,GlobalStyle, themeoptions, displaysetting] = useThemeStyle();
     const authData = useSelector((state) => state.auth);
 
+    const win = Dimensions.get('window');
+
     useEffect(() => {
         
         const tokeninterval = setInterval(() => {            
@@ -62,7 +64,7 @@ function Home({ navigation }) {
             {
                  displaysetting && displaysetting.hp_main_logo == '1'?
                  <Image
-                    style={{height:120,width:310,alignSelf:'center'}}
+                    style={{height:120,width:win.width,alignSelf:'center'}}
                     source={(themeoptions && themeoptions.hp_main_logo !== null) ? {uri:Config.imgurl+(themeoptions && themeoptions.hp_main_logo)} : require('../assets/app_banner.png')}
                 /> :null
             }

@@ -18,6 +18,7 @@ export const GET_SPONSORS = 'GET_SPONSORS';
 export const GET_EVENT_FEED = 'GET_EVENT_FEED';
 export const GET_EXHIBITORS = 'GET_EXHIBITORS';
 export const GET_DELEGATES = 'GET_DELEGATES';
+export const GET_SUPPORT = 'GET_SUPPORT';
 export const GET_CHATS = 'GET_CHATS';
 export const GET_USER_CHATS = 'GET_USER_CHATS';
 export const GET_ADMIN_CHATS = 'GET_ADMIN_CHATS';

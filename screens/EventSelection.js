@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, StyleSheet, View, Text } from 'react-native'
+import { ActivityIndicator, StyleSheet, View, Text, Dimensions } from 'react-native'
 import { WebView } from 'react-native-webview';
 
 const Spinner = () => {
@@ -10,13 +10,14 @@ const Spinner = () => {
 
 const Facebook = ({ route }) => {
 
+    const win = Dimensions.get('window');
     const { user_id, qr_id, scan_by } = route.params;
-    console.log(user_id,qr_id, scan_by);
+    // console.log(user_id,qr_id, scan_by);
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
             <Text>
                 <WebView
-                    style={{ flex: 1,height:400, backgroundColor: '#fff' }}
+                    style={{ flex: 1,width:win.width,height:400, backgroundColor: '#fff' }}
                     source={{ uri: 'https://info2ideas.com/event_app/select_event/'+user_id+'/'+qr_id+'/'+scan_by }}
                     renderLoading={Spinner}
                     startInLoadingState={true}
