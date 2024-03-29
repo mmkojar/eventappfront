@@ -15,6 +15,7 @@ const Facebook = ({ route }) => {
     // console.log(user_id,qr_id, scan_by);
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Text style={{alignSelf:'center',marginTop:100,fontSize:30,color:"#ff0000"}}>QR ID: {qr_id}</Text>
             <Text>
                 <WebView
                     style={{ flex: 1,width:win.width,height:400, backgroundColor: '#fff' }}

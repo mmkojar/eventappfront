@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendMessage, getAllChats } from '../components/redux/actions/chatActions';
 // import { START_LOADER, STOP_LOADER } from '../components/redux/actions/type';
 import useThemeStyle from '../components/utils/useThemeStyle';
-// import { fcmService } from '../services/FCMService';
-// import { localNotificationService } from '../services/LocalNotificationService';
-// import { navigate } from '../services/RootNavigation';
 
 const ChatBox = ({ route, navigation }) => {
     
@@ -21,8 +18,6 @@ const ChatBox = ({ route, navigation }) => {
     const [message,Setmessage] = useState();
 
     useEffect(() => {
-        // fcmService.register(onRegister,onNotification,onOpenNotification)
-        // localNotificationService.configure(onOpenNotification);
         
         // dispatch({
         //     type: START_LOADER,
@@ -53,47 +48,9 @@ const ChatBox = ({ route, navigation }) => {
         
     const pressHandler = () => {
         dispatch(sendMessage(authData.data.user_id,receiver_id,message));
-        // dispatch(getAllChats(authData.data.user_id,receiver_id));
+        dispatch(getAllChats(authData.data.user_id,receiver_id));
         Setmessage('');
     }
-
-    // For Notification handles
-    const onRegister = () => {}
-   /*  const onNotification = (notify) => {
-        const options = {
-          soundName: 'default',
-          playSound: true,
-          priority:'high'
-        }
-        // console.log("xxxxx:",notify);
-        // console.log("user2id:",receiver_id);
-        if(receiver_id !== notify.sender_id) {          
-          localNotificationService.showNotification(
-            notify.title,
-            notify.body,
-            notify,
-            options,
-          )
-        } 
-     }*/
-      
-      
-    /*const onOpenNotification = async (notify) => {
-    
-         console.log("xxxxxxx:",notify);
-        if(notify.data.type=="message") {
-            if(notify.userInteraction == true) {
-                dispatch(getAllChats(notify.data.sender_id,notify.data.receiver_id));
-            }
-                // if(notify.userInteraction == true) {
-                // navigate('ChatBox', {
-                //     id: notify.data.sender_id,
-                //     full_name: notify.data.sender_name,
-                // });
-                // }
-            
-        } 
-    }*/
 
     const keydate = new Date();
     return (

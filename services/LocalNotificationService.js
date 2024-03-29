@@ -97,7 +97,7 @@ class LocalNotificationService {
                 soundName : options.soundName || 'default',
                 userInteraction : true , // BOOLEAN : If notification was opened by the user from notification
                 badge : true,             
-                image:'https://i.pinimg.com/originals/a1/47/29/a14729422f50f6c13e835572982b58e2.jpg',
+                image:'https://i.pinimg.com/564x/bf/90/af/bf90af0c848adb89c4e3f965beba12bc.jpg',
                 userInfo: data,
             });
         }
