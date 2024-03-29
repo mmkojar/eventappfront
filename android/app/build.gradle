@@ -138,9 +138,9 @@ android {
     defaultConfig {
         applicationId "com.eventapp.aopmeet"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.1"
+        targetSdkVersion rootProject.ext.targetSdkVersion   
+        versionCode 4
+        versionName "1.2"
         multiDexEnabled true
         missingDimensionStrategy 'react-native-camera', 'general'
     }
